@@ -168,4 +168,8 @@ export class FuncionarioComponent implements OnInit {
       }
     )
   }
+  
+  testar() {
+
+  }
 }
