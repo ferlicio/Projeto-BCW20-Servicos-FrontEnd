@@ -14,9 +14,10 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FormFuncionarioComponent implements OnInit {
 
   formFuncionario: FormGroup = this.fb.group({
-    nome: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    foto: ['']
+    nome: ['', [ Validators.required ]],
+    email: ['', [ Validators.required, Validators.email ]],
+    foto: [''],
+    cargo:['', [ Validators.required ]]
   })
 
   foto!: File
@@ -37,6 +38,9 @@ export class FormFuncionarioComponent implements OnInit {
     this.foto = event.target.files[0]
     this.carregarPreview()
   }
+  recuperarCargos():void {
+
+  }
 
   carregarPreview(): void {
     const reader = new FileReader()
@@ -54,9 +58,9 @@ export class FormFuncionarioComponent implements OnInit {
     let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.foto)
+      obsSalvar = this.funcService.salvarFuncionario(f, this.foto, f.cargo)
     } else {
-      obsSalvar = this.funcService.salvarFuncionario(f)
+      obsSalvar = this.funcService.salvarFuncionario(f, undefined, f.cargo)
     }
 
     obsSalvar.subscribe(

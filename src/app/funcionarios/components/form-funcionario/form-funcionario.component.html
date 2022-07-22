@@ -14,7 +14,14 @@
       <mat-label>E-mail</mat-label>
       <input type="email" placeholder="Ex: seuemail@mail.com" matInput formControlName="email">
     </mat-form-field>
-
+    <mat-form-field appearance="fill">
+      <mat-label>Cargo</mat-label>
+      <input
+        type="cargo"
+        placeholder="Ex: Gerente"
+        matInput
+        formControlName="cargo"
+      >
     <input type="file" accept="image/*" id="file-input" #fileInput (change)="recuperarFoto($event)"
       formControlName="foto">
     <button type="button" mat-stroked-button color="primary" (click)="fileInput.click()"
