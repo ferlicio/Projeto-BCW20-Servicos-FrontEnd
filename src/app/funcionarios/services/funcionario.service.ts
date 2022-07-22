@@ -23,19 +23,15 @@ export class FuncionarioService {
     const token = this.authService.recuperarToken()
 
     // Bearer token
-    return this.http.get<Funcionario[]>(this.baseUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.get<Funcionario[]>(this.baseUrl)
   }
 
-  // http://localhost:3000/funcionarios/
+  // http://localhost:8080/servicos/funcionarios
   deleteFuncionario(func: Funcionario): Observable<any> {
     const token = this.authService.recuperarToken()
 
     // se não tiver foto, apenas será deletado o email e nome
-    if (func.foto.length > 0) {
+    if (func.foto != null && func.foto.length > 0) {
       //1° pegar a referência da imagem no fireStorage
       /**
        * refFromURL() pega referência do arquivo do storage pelo link de acesso gerado
@@ -48,30 +44,18 @@ export class FuncionarioService {
            * mergeMap tem a função de pegar dois ou mais observables e transformar todos
            * em um só
            */
-          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
+          return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
         })
       )
     }
 
-    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.delete<any>(`${this.baseUrl}/${func.idFuncionario}`)
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {
     const token = this.authService.recuperarToken()
 
-    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`)
   }
 
   /**
@@ -81,7 +65,7 @@ export class FuncionarioService {
   /**
    * O ? na frente do parâmetro faz com que ele seja opcional na hora de executar a função
    */
-  salvarFuncionario(func: Funcionario, foto?: File) {
+  salvarFuncionario(func: Funcionario, foto?: File, cargo?: number) {
     /**
      * fazendo requisição POST para salvar os dados do funcionário
      * return funcionário que acabou de ser salvo
@@ -97,10 +81,11 @@ export class FuncionarioService {
      * transformando em algo diferente e te retorna esse dado modificado
      */
     if (foto == undefined) { // se a foto não existe, será retornado um observable que apenas salva os dados básicos
-      return this.http.post<Funcionario>(this.baseUrl, func)
+      return this.http.post<Funcionario>(`${this.baseUrl}/${func.cargo}`, func)
+        
     }
 
-    return this.http.post<Funcionario>(this.baseUrl, func)
+    return this.http.post<Funcionario>(`${this.baseUrl}/${func.cargo}`, func)
     .pipe(
       map(async (func) => {
         // 1° Fazer upload da imagem e recuperar o link gerado
@@ -151,6 +136,16 @@ export class FuncionarioService {
         this.atualizarFuncionariosSub$.next(true)
       })
     )
+  }
+  
+  getCargoById(id: number): Observable<Funcionario> {
+    const token = this.authService.recuperarToken()
+
+    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   // 1° Pegar a imagem
