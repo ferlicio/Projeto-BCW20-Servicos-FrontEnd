@@ -14,8 +14,8 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FormFuncionarioComponent implements OnInit {
 
   formFuncionario: FormGroup = this.fb.group({
-    nome: ['', [ Validators.required ]],
-    email: ['', [ Validators.required, Validators.email ]],
+    nome: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     foto: ['']
   })
 
