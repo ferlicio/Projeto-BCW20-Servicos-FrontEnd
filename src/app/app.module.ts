@@ -22,7 +22,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MaterialModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
