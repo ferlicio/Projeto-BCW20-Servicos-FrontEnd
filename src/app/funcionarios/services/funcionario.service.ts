@@ -81,11 +81,11 @@ export class FuncionarioService {
      * transformando em algo diferente e te retorna esse dado modificado
      */
     if (foto == undefined) { // se a foto não existe, será retornado um observable que apenas salva os dados básicos
-      return this.http.post<Funcionario>(`${this.baseUrl}/${func.cargo}`, func)
+      return this.http.post<Funcionario>(`${this.baseUrl}/${cargo}`, func)
         
     }
 
-    return this.http.post<Funcionario>(`${this.baseUrl}/${func.cargo}`, func)
+    return this.http.post<Funcionario>(`${this.baseUrl}/${cargo}`, func)
     .pipe(
       map(async (func) => {
         // 1° Fazer upload da imagem e recuperar o link gerado
@@ -138,15 +138,7 @@ export class FuncionarioService {
     )
   }
   
-  getCargoById(id: number): Observable<Funcionario> {
-    const token = this.authService.recuperarToken()
 
-    return this.http.get<Funcionario>(`${this.baseUrl}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-  }
 
   // 1° Pegar a imagem
   // 2° Fazer o upload da imagem
