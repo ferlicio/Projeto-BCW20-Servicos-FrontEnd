@@ -20,7 +20,6 @@ export class FuncionarioService {
   ) { }
 
   getFuncionarios(): Observable<Funcionario[]> {
-    const token = this.authService.recuperarToken()
 
     // Bearer token
     return this.http.get<Funcionario[]>(this.baseUrl)
@@ -28,7 +27,6 @@ export class FuncionarioService {
 
   // http://localhost:8080/servicos/funcionarios
   deleteFuncionario(func: Funcionario): Observable<any> {
-    const token = this.authService.recuperarToken()
 
     // se não tiver foto, apenas será deletado o email e nome
     if (func.foto != null && func.foto.length > 0) {
@@ -53,9 +51,15 @@ export class FuncionarioService {
   }
 
   getFuncionarioById(id: number): Observable<Funcionario> {
-    const token = this.authService.recuperarToken()
-
     return this.http.get<Funcionario>(`${this.baseUrl}/${id}`)
+  }
+
+  getFuncionariosByEmail(email: string): Observable<Funcionario> {
+    return this.http.get<Funcionario>(`${this.baseUrl}Email/${email}`)
+  }
+
+  getFuncionariosByCargo(idCargo: number): Observable<Funcionario> {
+    return this.http.get<Funcionario>(`${this.baseUrl}DoCargo/${idCargo}`)
   }
 
   /**
@@ -65,7 +69,7 @@ export class FuncionarioService {
   /**
    * O ? na frente do parâmetro faz com que ele seja opcional na hora de executar a função
    */
-  salvarFuncionario(func: Funcionario, foto?: File, cargo?: number) {
+  salvarFuncionario(func: Funcionario, cargo: number, foto?: File) {
     /**
      * fazendo requisição POST para salvar os dados do funcionário
      * return funcionário que acabou de ser salvo
@@ -95,14 +99,14 @@ export class FuncionarioService {
         func.foto = linkFotoFirebase
 
         // 3° Atualizar funcionário com a foto
-        return this.atualizarFuncionario(func)
+        return this.atualizarFuncionario(func, cargo)
       })
     )
   }
 
   // fazer com que a função receba a foto ou não
-  atualizarFuncionario(func: Funcionario, foto?: File): any {
-
+  atualizarFuncionario(func: Funcionario, cargo: number, foto?: File): any {
+    func.cargo = cargo
     // se a foto não foi passada, atualizar apenas com os dados básicos
     if (foto == undefined) {
       return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func)
@@ -130,7 +134,7 @@ export class FuncionarioService {
 
         funcionarioAtualizado.foto = linkFotoFirebase
 
-        return this.atualizarFuncionario(funcionarioAtualizado)
+        return this.atualizarFuncionario(funcionarioAtualizado,cargo)
       }),
       tap((funcionario) => {
         this.atualizarFuncionariosSub$.next(true)

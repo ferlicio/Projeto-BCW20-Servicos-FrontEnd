@@ -16,7 +16,9 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FormFuncionarioComponent implements OnInit {
 
   cargos: Cargo[] = []
-  cargoSelect!: Cargo
+  cargoSelect: Cargo = {idCargo: 0, nome: '', descricao: '', salario: 0}
+  
+
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
@@ -72,9 +74,9 @@ export class FormFuncionarioComponent implements OnInit {
     let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.foto, this.cargoSelect.idCargo)
+      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect.idCargo, this.foto)
     } else {
-      obsSalvar = this.funcService.salvarFuncionario(f, undefined, this.cargoSelect.idCargo)
+      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect.idCargo, undefined)
     }
 
     obsSalvar.subscribe(

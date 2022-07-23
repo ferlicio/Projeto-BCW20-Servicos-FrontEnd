@@ -6,7 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
+import { Cargo } from '../../models/cargo';
 import { Funcionario } from '../../models/funcionario';
+import { CargosService } from '../../services/cargo.service';
 import { FuncionarioService } from '../../services/funcionario.service';
 
 @Component({
@@ -16,6 +18,8 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
+  cargos: Cargo[] = []
+  cargoSelect: Cargo = {idCargo: 0, nome: '', descricao: '', salario: 0}
   funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
@@ -32,6 +36,7 @@ export class FuncionarioComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, // acessar os parâmetros da rota ativa
     private funcService: FuncionarioService,
+    private cargoService: CargosService,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
@@ -122,7 +127,7 @@ export class FuncionarioComponent implements OnInit {
 
     const temFoto = this.formFuncionario.value.foto.length > 0
 
-    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, temFoto ? this.foto : undefined)
+    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, this.cargoSelect.idCargo , temFoto ? this.foto : undefined)
 
     obsSalvar
       .subscribe(

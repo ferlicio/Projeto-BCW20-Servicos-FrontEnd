@@ -24,4 +24,16 @@ export class CargosService {
     return this.http.get<Cargo>(`${this.baseUrl}/${id}`)
   }
 
+  salvarCargo(cargo: Cargo): Observable<Cargo> {
+    return this.http.post<Cargo>(this.baseUrl, cargo)
+  } 
+
+  atualizarCargo(cargo: Cargo): Observable<Cargo> {
+      return this.http.put<Cargo>(`${this.baseUrl}/${cargo.idCargo}`, cargo)
+  }
+
+  deleteCargo(cargo: Cargo): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${cargo.idCargo}`)
+  }
+  
 }
