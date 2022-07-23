@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+import { Cargo } from '../../models/cargo';
 import { Funcionario } from '../../models/funcionario';
+import { CargosService } from '../../services/cargo.service';
 import { FuncionarioService } from '../../services/funcionario.service';
 
 @Component({
@@ -13,11 +15,13 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FormFuncionarioComponent implements OnInit {
 
+  cargos: Cargo[] = []
+  cargoSelect!: Cargo
+
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [ Validators.required ]],
     email: ['', [ Validators.required, Validators.email ]],
-    foto: [''],
-    cargo:['', [ Validators.required ]]
+    foto: ['']
   })
 
   foto!: File
@@ -27,20 +31,30 @@ export class FormFuncionarioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private funcService: FuncionarioService,
+    private cargoService: CargosService,
     private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
     private snackbar: MatSnackBar // com esse objeto será criado um snackbar na tela
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    
+    this.cargoService.getCargos().subscribe(
+      (cargs) => { // sucesso
+        this.cargos = cargs
+        /**
+         * o reverse reverterá o array para que na lista
+         * os funcionários apareçam do mais novo para o mais
+         * antigo
+         */
+      }
+    )
   }
 
   recuperarFoto(event: any): void {
     this.foto = event.target.files[0]
     this.carregarPreview()
   }
-  recuperarCargos():void {
 
-  }
 
   carregarPreview(): void {
     const reader = new FileReader()
@@ -58,9 +72,9 @@ export class FormFuncionarioComponent implements OnInit {
     let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.foto, f.cargo)
+      obsSalvar = this.funcService.salvarFuncionario(f, this.foto, this.cargoSelect.idCargo)
     } else {
-      obsSalvar = this.funcService.salvarFuncionario(f, undefined, f.cargo)
+      obsSalvar = this.funcService.salvarFuncionario(f, undefined, this.cargoSelect.idCargo)
     }
 
     obsSalvar.subscribe(
