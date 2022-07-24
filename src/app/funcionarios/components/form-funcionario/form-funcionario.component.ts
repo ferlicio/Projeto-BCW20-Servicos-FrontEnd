@@ -16,13 +16,13 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FormFuncionarioComponent implements OnInit {
 
   cargos: Cargo[] = []
-  cargoSelect: Cargo = {idCargo: 0, nome: '', descricao: '', salario: 0}
-  
+  cargoSelect: Cargo = { idCargo: 0, nome: '', descricao: '', salario: 0 }
+
 
 
   formFuncionario: FormGroup = this.fb.group({
-    nome: ['', [ Validators.required ]],
-    email: ['', [ Validators.required, Validators.email ]],
+    nome: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     foto: ['']
   })
 
@@ -38,16 +38,12 @@ export class FormFuncionarioComponent implements OnInit {
     private snackbar: MatSnackBar // com esse objeto será criado um snackbar na tela
   ) { }
 
-  ngOnInit(): void {  
-    
+  ngOnInit(): void {
+
     this.cargoService.getCargos().subscribe(
       (cargs) => { // sucesso
         this.cargos = cargs
-        /**
-         * o reverse reverterá o array para que na lista
-         * os funcionários apareçam do mais novo para o mais
-         * antigo
-         */
+
       }
     )
   }

@@ -10,10 +10,12 @@ import { AngularFireModule } from '@angular/fire/compat/'
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -24,11 +26,14 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
   ],
+  exports: [
+    NavbarComponent
+  ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-}],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
