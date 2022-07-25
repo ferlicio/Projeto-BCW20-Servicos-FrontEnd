@@ -8,10 +8,15 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  dataToken!: Date
+  emailToken!: string;
+
   constructor(
     public authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.dataToken = this.authService.dataToken()
+    this.emailToken = this.authService.emailToken();
   }
 }

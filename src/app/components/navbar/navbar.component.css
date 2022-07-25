@@ -6,3 +6,8 @@ mat-toolbar-row {
 .separador {
   flex-grow: 1;
 }
+
+p {
+  font-size: 14px;
+  padding-right: 4px;
+}
