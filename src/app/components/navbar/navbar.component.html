@@ -2,6 +2,7 @@
   <mat-toolbar-row>
     <h1>Services</h1>
     <span class="separador"></span>
+    <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'd/MM/yy, h:mm'}} </p>
     <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a mat-menu-item routerLink="/funcionarios">Listar</a>
