@@ -1,0 +1,42 @@
+<div class="loader" *ngIf="pagamento == undefined; else principal">
+    <p>{{ naoEncontrado == true ? 'Pagamento não encontrado' : 'Procurando pagamento...' }}</p>
+    <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
+</div>
+<ng-template #principal>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ pagamento.valor }}</mat-card-title>
+            <mat-card-subtitle>{{ pagamento.formpagamento}}</mat-card-subtitle>
+            <mat-card-subtitle> {{ pagamento.statusPagamento }} </mat-card-subtitle>
+
+            <button mat-menu-item routerLink="/pagamentos" matTooltip="Voltar">
+                <mat-icon>arrow_back</mat-icon>
+                Voltar
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+            <form action="" [formGroup]="formPagamento" (ngSubmit)="salvarAtualizacoes()">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Valor</mat-label>
+                    <input type="text" matInput placeholder="Ex: 20000" formControlName="valor">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Forma Pagamento</mat-label>
+                    <input type="text" matInput placeholder="A vista/Credito" formControlName="formPagamento">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Status Pagamento</mat-label>
+                    <input type="text" matInput placeholder="QUITADO/LANCADO" formControlName="statusPagamento">
+                </mat-form-field>
+
+
+                <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar"
+                    matTooltip="Salvar atualizações do pagamento" matTooltipPosition="above">Salvar
+                    atualizações</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
