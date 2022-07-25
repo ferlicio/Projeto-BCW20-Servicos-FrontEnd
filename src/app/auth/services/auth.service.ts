@@ -34,8 +34,8 @@ export class AuthService {
     this.dialog.open(ConfirmarLogoutComponent)
       .afterClosed().subscribe(result => {
         if (result) {
-          this.router.navigateByUrl('/auth/login')
           this.removerToken()
+          this.router.navigateByUrl('/auth/login')
         }
       })
   }
