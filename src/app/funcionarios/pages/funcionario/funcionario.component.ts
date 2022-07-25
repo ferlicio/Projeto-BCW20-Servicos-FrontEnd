@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
@@ -19,7 +20,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FuncionarioComponent implements OnInit {
 
   cargos: Cargo[] = []
-  cargoSelect: Cargo = {idCargo: 0, nome: '', descricao: '', salario: 0}
+  cargoSelect: Cargo = { idCargo: 0, nome: '', descricao: '', salario: 0 }
   funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
@@ -40,7 +41,8 @@ export class FuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router // serve para fazer o redirecionamento entre as páginas do app pelo ts
+    private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
+    private title: Title
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class FuncionarioComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params) => {
         let idFuncionario = parseInt(params.get('idFuncionario') ?? '0')
+        this.title.setTitle('Funcionario ' + idFuncionario)
         this.recuperarFuncionario(idFuncionario)
       }
     )
@@ -127,7 +130,7 @@ export class FuncionarioComponent implements OnInit {
 
     const temFoto = this.formFuncionario.value.foto.length > 0
 
-    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, this.cargoSelect.idCargo , temFoto ? this.foto : undefined)
+    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, this.cargoSelect.idCargo, temFoto ? this.foto : undefined)
 
     obsSalvar
       .subscribe(
