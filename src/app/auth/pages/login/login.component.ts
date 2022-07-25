@@ -11,11 +11,15 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  protected aFormGroup!: FormGroup 
 
   loginForm: FormGroup = this.fb.group({
     login: ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required]],
+    recaptcha: ['', [Validators.required]]
   })
+
+  siteKey: string = "6LcVVhwhAAAAAL8Mw7IZkBJE_pQ5V4zL0ragceLP"
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const credenciais = this.loginForm.value
+    const credenciais = {
+      login: this.loginForm.value.login,
+      password: this.loginForm.value.password
+    }
 
     this.authService.signIn(credenciais)
       .subscribe(

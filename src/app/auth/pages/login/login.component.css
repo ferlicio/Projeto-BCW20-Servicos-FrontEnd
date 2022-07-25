@@ -26,3 +26,9 @@
   flex-direction: column;
   width: 100%;
 }
+
+ngx-recaptcha2 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 21px;
+}
