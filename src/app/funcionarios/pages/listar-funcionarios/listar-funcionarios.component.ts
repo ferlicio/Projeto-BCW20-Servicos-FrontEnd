@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { FormFuncionarioComponent } from '../../components/form-funcionario/form-funcionario.component';
 import { Funcionario } from '../../models/funcionario';
@@ -21,7 +22,7 @@ export class ListarFuncionariosComponent implements OnInit {
     private funcService: FuncionarioService,
     private dialog: MatDialog, // responsável por abrir o componente confirmar-delecao na tela
     private snackbar: MatSnackBar,
-    private title: Title
+    private title: Title,
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class ListarFuncionariosComponent implements OnInit {
           }
         }
       )
+
   }
 
   deletarFuncionario(func: Funcionario): void {

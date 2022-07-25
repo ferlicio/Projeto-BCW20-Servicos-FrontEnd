@@ -20,11 +20,13 @@ export class AuthService {
 
   signIn(user: User): Observable<{ Authorization: string }> {
     return this.http.post<{ Authorization: string }>(`${this.baseUrl}/login`, user)
-    .pipe(
-      tap((response) => {
-        this.armazenarToken(response.Authorization)
-      })
-    )
+      .pipe(
+
+        tap((response) => {
+          this.armazenarToken(response.Authorization)
+
+        })
+      )
   }
 
   signOut(): void {
@@ -54,5 +56,20 @@ export class AuthService {
     }
 
     return !this.jwt.isTokenExpired(token) // testando a validade do token
+  }
+
+  dataToken() {
+    const token = this.recuperarToken();
+    const decodedToken = this.jwt.decodeToken(token!);
+    const date = new Date(0);
+    date.setUTCSeconds(decodedToken.exp);
+    return date;
+  }
+
+  emailToken() {
+    const token = this.recuperarToken();
+    const decodedToken = this.jwt.decodeToken(token!);
+    const emailToken = decodedToken.sub
+    return emailToken;
   }
 }
