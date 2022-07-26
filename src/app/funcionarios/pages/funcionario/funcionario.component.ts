@@ -19,9 +19,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
-  cargos?: Cargo[] = [{ idCargo: 0, nome: '', descricao: '', salario: 0 }]
-  cargoSelect: Cargo = { idCargo: 0, nome: '', descricao: '', salario: 0 }
-  funcionario!: Funcionario
+  cargos?: Cargo[] = [{ idCargo: 0 , nome: '', descricao: '', salario: 0 }]
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
@@ -65,8 +63,6 @@ export class FuncionarioComponent implements OnInit {
           //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
           this.recuperarCargos()
           this.funcionario = func
-          this.cargoSelect = this.funcionario.cargo
-
           /* console.log(this.funcionario.cargo) */
 
           // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
@@ -77,13 +73,11 @@ export class FuncionarioComponent implements OnInit {
            * e colocar dentro dos formControls
            */
 
-
-
           this.formFuncionario.setValue({
             nome: this.funcionario.nome,
             email: this.funcionario.email,
             foto: '',
-            cargo: this.cargoSelect.idCargo
+            cargo: this.funcionario.cargo.idCargo
           })
 
           // 3° carregar o preview da imagem
@@ -137,8 +131,6 @@ export class FuncionarioComponent implements OnInit {
            * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
            * propriedade do objeto funcionário
            */
-          console.log(valores)
-          console.log(this.funcionario.cargo.idCargo)
           this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0 || valores.cargo != this.funcionario.cargo.idCargo)
         }
       )
@@ -148,7 +140,11 @@ export class FuncionarioComponent implements OnInit {
     const f: Funcionario = { ...this.formFuncionario.value }
     f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
-    f.cargo = this.cargoSelect
+    this.cargoService.getCargoById(this.formFuncionario.value.cargo).subscribe(
+      (cargo) => {
+        f.cargo = cargo
+      }
+    )
 
     const temFoto = this.formFuncionario.value.foto.length > 0
     const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, f.cargo, temFoto ? this.foto : undefined)

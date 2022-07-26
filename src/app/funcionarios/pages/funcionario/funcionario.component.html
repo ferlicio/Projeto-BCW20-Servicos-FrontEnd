@@ -38,7 +38,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Cargo</mat-label>
-          <mat-select formControlName="cargo" [(value)]="cargoSelect.idCargo">
+          <mat-select formControlName="cargo">
             <mat-option [value]=cargo.idCargo *ngFor="let cargo of cargos">{{cargo.nome}}</mat-option>
           </mat-select>
         </mat-form-field>
