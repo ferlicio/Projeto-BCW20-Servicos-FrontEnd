@@ -20,6 +20,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FuncionarioComponent implements OnInit {
 
   cargos?: Cargo[] = [{ idCargo: 0 , nome: '', descricao: '', salario: 0 }]
+  funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
