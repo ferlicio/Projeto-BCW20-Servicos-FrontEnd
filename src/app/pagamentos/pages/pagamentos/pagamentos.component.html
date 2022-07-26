@@ -3,16 +3,17 @@
     <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
 </div>
 <ng-template #principal>
+    <button class="btn-voltar" mat-menu-item routerLink="/pagamentos" matTooltip="Voltar">
+        <mat-icon routerLink="/pagamentos" matTooltip="Voltar">arrow_back</mat-icon>
+
+    </button>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>{{ pagamento.valor }}</mat-card-title>
-            <mat-card-subtitle>{{ pagamento.formpagamento}}</mat-card-subtitle>
-            <mat-card-subtitle> {{ pagamento.statusPagamento }} </mat-card-subtitle>
+            <mat-card-title> Pagamento nº. {{ pagamento.valor }}</mat-card-title>
+            <mat-card-subtitle> Forma: {{ pagamento.formPagamento}}</mat-card-subtitle>
+            <mat-card-subtitle> Status: {{ pagamento.statusPagamento }} </mat-card-subtitle>
 
-            <button mat-menu-item routerLink="/pagamentos" matTooltip="Voltar">
-                <mat-icon>arrow_back</mat-icon>
-                Voltar
-            </button>
+
         </mat-card-header>
         <mat-card-content>
             <form action="" [formGroup]="formPagamento" (ngSubmit)="salvarAtualizacoes()">

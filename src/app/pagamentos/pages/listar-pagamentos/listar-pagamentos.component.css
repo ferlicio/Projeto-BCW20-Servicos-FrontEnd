@@ -29,6 +29,7 @@ main {
 }
 
 table {
+  width: 100%;
   height: fit-content;
 }
 
@@ -40,4 +41,10 @@ table {
   position: fixed;
   right: 16px;
   bottom: 16px;
+}
+
+.content-before-table {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
 }

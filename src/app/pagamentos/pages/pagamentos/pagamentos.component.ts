@@ -73,7 +73,7 @@ export class PagamentosComponent implements OnInit {
       .subscribe(
         (valores) => {
           console.log(valores)
-          this.desabilitar = this.formPagamento.invalid || !(valores.valor != this.pagamento.valor || valores.formPagamento != this.pagamento.formpagamento || valores.statusPagamento != this.pagamento.statusPagamento)
+          this.desabilitar = this.formPagamento.invalid || !(valores.valor != this.pagamento.valor || valores.formPagamento != this.pagamento.formPagamento || valores.statusPagamento != this.pagamento.statusPagamento)
         }
       )
   }
