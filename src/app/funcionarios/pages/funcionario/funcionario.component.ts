@@ -138,15 +138,10 @@ export class FuncionarioComponent implements OnInit {
   }
 
   salvarAtualizacoes() {
-    const f: Funcionario = { ...this.formFuncionario.value }
+    const f: Funcionario = { ...this.formFuncionario.value, cargo:{ idCargo:this.formFuncionario.value.cargo } }
     f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
-    this.cargoService.getCargoById(this.formFuncionario.value.cargo).subscribe(
-      (cargo) => {
-        f.cargo = cargo
-      }
-    )
-
+      
     const temFoto = this.formFuncionario.value.foto.length > 0
     const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, f.cargo, temFoto ? this.foto : undefined)
 
