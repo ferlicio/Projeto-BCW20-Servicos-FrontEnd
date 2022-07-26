@@ -106,9 +106,9 @@ export class FuncionarioService {
   }
 
   // fazer com que a função receba a foto ou não
-  atualizarFuncionario(func: Funcionario, cargo: Cargo, foto?: File): any {
-    func.cargo = cargo
+  atualizarFuncionario(func: Funcionario, cargo:any, foto?: File): any {
     // se a foto não foi passada, atualizar apenas com os dados básicos
+    func.cargo = cargo
     if (foto == undefined) {
       return this.http.put<Funcionario>(`${this.baseUrl}/${func.idFuncionario}`, func)
       .pipe(
