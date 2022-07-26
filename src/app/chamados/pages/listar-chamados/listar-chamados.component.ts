@@ -12,7 +12,7 @@ import { ChamadosService } from '../../service/chamados.service';
 })
 export class ListarChamadosComponent implements OnInit {
 
-  displayedColumns: string[] = ['idChamado', 'titulo', 'descricao', 'dataEntrada', 'status', 'idFuncionario', 'idCliente', 'idPagamento'];
+  displayedColumns: string[] = ['idChamado', 'titulo', 'descricao', 'dataEntrada', 'status', 'idFuncionario', 'idCliente', 'idPagamento', 'actions'];
 
   dataSource!: MatTableDataSource<any>;
 

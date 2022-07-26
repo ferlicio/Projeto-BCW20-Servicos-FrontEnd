@@ -16,7 +16,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class ListarFuncionariosComponent implements OnInit {
 
   funcionarios: Funcionario[] = []
-  colunas: Array<string> = ['id', 'nome', 'email', 'cargo' , 'actions']
+  colunas: Array<string> = ['id', 'nome', 'email', 'cargo', 'actions']
 
   constructor(
     private funcService: FuncionarioService,
@@ -110,7 +110,7 @@ export class ListarFuncionariosComponent implements OnInit {
   abrirFormFuncionario(): void {
     // abrindo o formulário do funcionário
     // e recuperando a referência desse dialog e guardando na variável
-    const referenciaDialog = this.dialog.open(FormFuncionarioComponent)
+    const referenciaDialog = this.dialog.open(FormFuncionarioComponent, { disableClose: true })
 
     /**
      * a função afterClosed() nos retorna um observable
