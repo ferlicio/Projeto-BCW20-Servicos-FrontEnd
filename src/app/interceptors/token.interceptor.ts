@@ -17,14 +17,14 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.authService.recuperarToken()
-    //console.log(request)
-
-    if (token) {
-      const clone = request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${token}`)
-      })
-      return next.handle(clone)
-    } 
+    if(request.url.includes('servicos/')) {
+      if (token) {
+        const clone = request.clone({
+          headers: request.headers.set('Authorization', `Bearer ${token}`)
+        })
+        return next.handle(clone)
+      }
+    }
 
     return next.handle(request);
   }
