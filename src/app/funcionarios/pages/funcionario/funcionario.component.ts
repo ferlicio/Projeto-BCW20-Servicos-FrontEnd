@@ -20,7 +20,6 @@ import { FuncionarioService } from '../../services/funcionario.service';
 export class FuncionarioComponent implements OnInit {
 
   cargos?: Cargo[] = [{ idCargo: 0 , nome: '', descricao: '', salario: 0 }]
-  funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
@@ -54,7 +53,7 @@ export class FuncionarioComponent implements OnInit {
         this.recuperarFuncionario(idFuncionario)
       }
     )
-    
+
   }
 
   recuperarFuncionario(id: number): void {
@@ -64,7 +63,6 @@ export class FuncionarioComponent implements OnInit {
           //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
           this.recuperarCargos()
           this.funcionario = func
-          
           /* console.log(this.funcionario.cargo) */
 
           // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
