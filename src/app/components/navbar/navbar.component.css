@@ -9,5 +9,9 @@ mat-toolbar-row {
 
 p {
   font-size: 14px;
-  padding-right: 4px;
+  padding-right: 14px;
+}
+
+h1 {
+  padding-left: 4vh;
 }

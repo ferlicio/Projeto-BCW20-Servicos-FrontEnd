@@ -1,36 +1,23 @@
 .container {
   min-height: calc(100vh - 64px);
   display: grid;
+  width: 100%;
   grid-template-rows: 1fr;
-  grid-template-columns: 100px 1fr;
-}
-
-#lateral {
-  background: #3f51b5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#lateral h2 {
-  color: white;
-  text-align: center;
-  font-weight: 500;
-  transform: rotate(-90deg);
+  grid-template-columns: 1fr;
 }
 
 main {
   display: grid;
-  grid-template-columns: 330px 1fr;
   grid-template-rows: 1fr;
+  grid-template-columns: 20% 1fr;
   padding: 16px;
   gap: 16px;
   box-sizing: border-box;
 }
 
 table {
-  width: 100%;
   height: fit-content;
+  width: 98%;
 }
 
 .ativo {
