@@ -19,7 +19,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
-  cargos?: Cargo[] = [{ idCargo: 0 , nome: '', descricao: '', salario: 0 }]
+  cargos?: Cargo[] = [{ idCargo: 0, nome: '', descricao: '', salario: 0 }]
   cargoSelect: Cargo = { idCargo: 0, nome: '', descricao: '', salario: 0 }
   funcionario!: Funcionario
 
@@ -55,7 +55,7 @@ export class FuncionarioComponent implements OnInit {
         this.recuperarFuncionario(idFuncionario)
       }
     )
-    
+
   }
 
   recuperarFuncionario(id: number): void {
@@ -66,7 +66,7 @@ export class FuncionarioComponent implements OnInit {
           this.recuperarCargos()
           this.funcionario = func
           this.cargoSelect = this.funcionario.cargo
-          
+
           /* console.log(this.funcionario.cargo) */
 
           // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
@@ -77,7 +77,7 @@ export class FuncionarioComponent implements OnInit {
            * e colocar dentro dos formControls
            */
 
-          
+
 
           this.formFuncionario.setValue({
             nome: this.funcionario.nome,
@@ -137,7 +137,9 @@ export class FuncionarioComponent implements OnInit {
            * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
            * propriedade do objeto funcionário
            */
-          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0 || valores.cargo != this.funcionario.cargo)
+          console.log(valores)
+          console.log(this.funcionario.cargo.idCargo)
+          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0 || valores.cargo != this.funcionario.cargo.idCargo)
         }
       )
   }

@@ -44,7 +44,7 @@ export class PagamentosComponent implements OnInit {
 
           this.formPagamento.setValue({
             valor: this.pagamento.valor,
-            formPagamento: this.pagamento.statusPagamento,
+            formPagamento: this.pagamento.formPagamento,
             statusPagamento: this.pagamento.statusPagamento,
           })
           this.valorMudou()
@@ -60,10 +60,12 @@ export class PagamentosComponent implements OnInit {
 
     this.pagamentoService.putPagamento(pagamento).subscribe(
       (resultado) => {
-        this.recuperarPagamento(resultado.idPagamento);
         this.snack.open('Pagamento alterado com sucesso', 'Ok', { duration: 3000 });
+        this.recuperarPagamento(pagamento.idPagamento)
       }
+
     )
+
   }
 
 
