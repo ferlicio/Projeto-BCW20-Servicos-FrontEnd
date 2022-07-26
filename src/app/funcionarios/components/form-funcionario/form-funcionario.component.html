@@ -1,5 +1,9 @@
 <div>
   <h2 mat-dialog-title>Novo Funcionário</h2>
+  <button type="" color="warn" mat-icon-button id="fechar" matTooltip="Salvar Funcionario" (click)="confirmarSaida()">
+    <mat-icon> close </mat-icon>
+  </button>
+
   <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoFuncionario"></mat-spinner>
 </div>
 <section mat-dialog-content>
@@ -17,7 +21,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Cargo</mat-label>
       <mat-select [(value)]="cargoSelect" required>
-        <mat-option [value]=cargo *ngFor="let cargo of cargos" >{{cargo.nome}}</mat-option>
+        <mat-option [value]=cargo *ngFor="let cargo of cargos">{{cargo.nome}}</mat-option>
       </mat-select>
     </mat-form-field>
     <input type="file" accept="image/*" id="file-input" #fileInput (change)="recuperarFoto($event)"

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Cargo } from '../../models/cargo';
 import { Funcionario } from '../../models/funcionario';
 import { CargosService } from '../../services/cargo.service';
 import { FuncionarioService } from '../../services/funcionario.service';
+import { ConfirmarSaidaComponent } from '../confirmar-saida/confirmar-saida.component';
 
 @Component({
   selector: 'app-form-funcionario',
@@ -35,7 +36,8 @@ export class FormFuncionarioComponent implements OnInit {
     private funcService: FuncionarioService,
     private cargoService: CargosService,
     private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
-    private snackbar: MatSnackBar // com esse objeto será criado um snackbar na tela
+    private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +66,16 @@ export class FormFuncionarioComponent implements OnInit {
     }
   }
 
+  confirmarSaida() {
+    this.dialog.open(ConfirmarSaidaComponent).afterClosed().subscribe(
+      (res) => {
+        if (res == true) {
+          this.dialogRef.close()
+        }
+      }
+    )
+  }
+
   salvar(): void {
     this.salvandoFuncionario = true
     const f: Funcionario = this.formFuncionario.value
@@ -77,27 +89,12 @@ export class FormFuncionarioComponent implements OnInit {
 
     obsSalvar.subscribe(
       (resultado) => {
-        // 1° testar se o resultado é uma Promise ou não
         if (resultado instanceof Promise) {
-          /**
-           * Se cair no if, significa que há uma promise e que tem uma
-           * foto para salvar
-           */
 
-          // 1° -> Recuperar o observable que me é retornado do primeiro subscribe
-
-          /**
-           * a função then() é executada
-           * quando a promise consegue te retornar os dados com sucesso
-           *
-           * nesse caso, o dado que será retorna é um observable com o funcionário
-           * que foi salvo no banco de dados
-           */
           resultado.then((obs$) => {
-            // inscrevendo-se no observable que nos retornará o funcionário salvo no banco de dados
+
             obs$.subscribe(
               () => {
-                // quando o funcionário for salvo, aparecerá um snackbar na tela e o dialog será fechado
                 this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
                   duration: 3000
                 })
@@ -106,10 +103,7 @@ export class FormFuncionarioComponent implements OnInit {
             )
           })
         } else {
-          /**
-           * Se cair no else, significa que o funcionário já foi salvo
-           * e não tinha foto para enviar
-           */
+
           this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
             duration: 3000
           })
