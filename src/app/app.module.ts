@@ -15,7 +15,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +26,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AngularFireStorageModule,
   ],
   exports: [
-    NavbarComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
 import { ConfirmarSaidaComponent } from './components/confirmar-saida/confirmar-saida.component';
 import { ConfirmarLogoutComponent } from './components/confirmar-logout/confirmar-logout.component';
+import { SharedModuleModule } from '../components/shared-module.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ConfirmarLogoutComponent } from './components/confirmar-logout/confirma
     FuncionariosRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    SharedModuleModule
   ]
 })
 export class FuncionariosModule { }

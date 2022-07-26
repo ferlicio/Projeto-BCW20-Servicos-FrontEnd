@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
 import { Cargo } from '../../models/cargo';
 import { Funcionario } from '../../models/funcionario';
@@ -19,7 +19,7 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
-  cargos?: Cargo[] = [{ idCargo: 0 , nome: '', descricao: '', salario: 0 }]
+  cargos?: Cargo[] = [{ idCargo: 0, nome: '', descricao: '', salario: 0 }]
   funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({

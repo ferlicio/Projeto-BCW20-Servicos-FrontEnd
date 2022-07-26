@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PagamentosComponent } from './pages/pagamentos/pagamentos.component';
 import { FormPagamentoComponent } from './componentes/form-pagamento/form-pagamento.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModuleModule } from '../components/shared-module.module';
 
 
 
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     PagamentoRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModuleModule
 
 
   ]

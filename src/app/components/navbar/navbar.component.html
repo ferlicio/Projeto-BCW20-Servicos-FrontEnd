@@ -1,12 +1,40 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <h1>Services</h1>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Botão menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>home_repair_service</mat-icon>
+        <span>Chamados</span>
+      </button>
+      <button mat-menu-item routerLink="/funcionarios">
+        <mat-icon>badge</mat-icon>
+        <span>Funcionarios</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>work</mat-icon>
+        <span>Cargos</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>person_filled</mat-icon>
+        <span>Clientes </span>
+      </button>
+      <button mat-menu-item routerLink="/pagamentos">
+        <mat-icon>payments</mat-icon>
+        <span>Pagamentos </span>
+      </button>
+    </mat-menu>
+
+    <h1>Painel de Administrador</h1>
+
     <span class="separador"></span>
     <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'd/MM/yy, h:mm'}} </p>
-    <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
+    <!--     <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
     <mat-menu #menuFuncionarios="matMenu">
       <a mat-menu-item routerLink="/funcionarios">Listar</a>
-    </mat-menu>
+    </mat-menu> -->
 
     <button mat-icon-button (click)="authService.signOut()" matTooltip="Deslogar">
       <mat-icon>logout</mat-icon>
