@@ -25,6 +25,7 @@ export class AuthService {
     return this.http.post<{ Authorization: string }>(`${this.baseUrl}/login`, user)
       .pipe(
         tap((response) => {
+          
           this.armazenarToken(response.Authorization)
         })
       )

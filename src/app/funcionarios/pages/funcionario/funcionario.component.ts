@@ -19,14 +19,15 @@ import { FuncionarioService } from '../../services/funcionario.service';
 })
 export class FuncionarioComponent implements OnInit {
 
-  cargos: Cargo[] = []
+  cargos?: Cargo[] = [{ idCargo: 0 , nome: '', descricao: '', salario: 0 }]
   cargoSelect: Cargo = { idCargo: 0, nome: '', descricao: '', salario: 0 }
   funcionario!: Funcionario
 
   formFuncionario: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    foto: ['']
+    foto: [''],
+    cargo: ['']
   })
 
   imagePreview: string = ''
@@ -54,6 +55,7 @@ export class FuncionarioComponent implements OnInit {
         this.recuperarFuncionario(idFuncionario)
       }
     )
+    
   }
 
   recuperarFuncionario(id: number): void {
@@ -61,7 +63,10 @@ export class FuncionarioComponent implements OnInit {
       .subscribe(
         func => {
           //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
+          this.recuperarCargos()
           this.funcionario = func
+          this.cargoSelect = this.funcionario.cargo
+          
           /* console.log(this.funcionario.cargo) */
 
           // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
@@ -71,10 +76,14 @@ export class FuncionarioComponent implements OnInit {
            * setValue() é responsável por pegar os valores que foram passados para ela
            * e colocar dentro dos formControls
            */
+
+          
+
           this.formFuncionario.setValue({
             nome: this.funcionario.nome,
             email: this.funcionario.email,
             foto: '',
+            cargo: this.cargoSelect.idCargo
           })
 
           // 3° carregar o preview da imagem
@@ -88,6 +97,7 @@ export class FuncionarioComponent implements OnInit {
       )
   }
 
+
   recuperarFoto(event: any): void {
     this.foto = event.target.files[0]
 
@@ -98,6 +108,15 @@ export class FuncionarioComponent implements OnInit {
     reader.onload = () => {
       this.imagePreview = reader.result as string
     }
+  }
+
+  recuperarCargos(): void {
+    this.cargoService.getCargos()
+      .subscribe(
+        cargos => {
+          this.cargos = cargos
+        }
+      )
   }
 
   valorMudou() {
@@ -118,7 +137,7 @@ export class FuncionarioComponent implements OnInit {
            * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
            * propriedade do objeto funcionário
            */
-          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0)
+          this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0 || valores.cargo != this.funcionario.cargo)
         }
       )
   }
@@ -127,10 +146,10 @@ export class FuncionarioComponent implements OnInit {
     const f: Funcionario = { ...this.formFuncionario.value }
     f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
+    f.cargo = this.cargoSelect
 
     const temFoto = this.formFuncionario.value.foto.length > 0
-
-    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, this.cargoSelect.idCargo, temFoto ? this.foto : undefined)
+    const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, f.cargo, temFoto ? this.foto : undefined)
 
     obsSalvar
       .subscribe(
@@ -143,7 +162,7 @@ export class FuncionarioComponent implements OnInit {
                     duration: 3000
                   })
 
-                  this.recuperarFuncionario(func.id)
+                  this.recuperarFuncionario(func.idFuncionario)
                 }
               )
           }
@@ -152,7 +171,7 @@ export class FuncionarioComponent implements OnInit {
             duration: 3000
           })
 
-          this.recuperarFuncionario(resultado.id)
+          this.recuperarFuncionario(resultado.idFuncionario)
         }
       )
   }

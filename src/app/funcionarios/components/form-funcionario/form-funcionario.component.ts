@@ -70,9 +70,9 @@ export class FormFuncionarioComponent implements OnInit {
     let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect.idCargo, this.foto)
+      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect, this.foto)
     } else {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect.idCargo, undefined)
+      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect, undefined)
     }
 
     obsSalvar.subscribe(

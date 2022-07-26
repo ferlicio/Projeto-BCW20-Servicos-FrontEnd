@@ -4,6 +4,7 @@ import { BehaviorSubject, map, mergeMap, Observable, tap } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; // importação do fireStorage
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Cargo } from '../models/cargo';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +70,7 @@ export class FuncionarioService {
   /**
    * O ? na frente do parâmetro faz com que ele seja opcional na hora de executar a função
    */
-  salvarFuncionario(func: Funcionario, cargo: number, foto?: File) {
+  salvarFuncionario(func: Funcionario, cargo: Cargo, foto?: File) {
     /**
      * fazendo requisição POST para salvar os dados do funcionário
      * return funcionário que acabou de ser salvo
@@ -85,11 +86,11 @@ export class FuncionarioService {
      * transformando em algo diferente e te retorna esse dado modificado
      */
     if (foto == undefined) { // se a foto não existe, será retornado um observable que apenas salva os dados básicos
-      return this.http.post<Funcionario>(`${this.baseUrl}/${cargo}`, func)
+      return this.http.post<Funcionario>(`${this.baseUrl}/${cargo.idCargo}`, func)
         
     }
 
-    return this.http.post<Funcionario>(`${this.baseUrl}/${cargo}`, func)
+    return this.http.post<Funcionario>(`${this.baseUrl}/${cargo.idCargo}`, func)
     .pipe(
       map(async (func) => {
         // 1° Fazer upload da imagem e recuperar o link gerado
@@ -105,7 +106,7 @@ export class FuncionarioService {
   }
 
   // fazer com que a função receba a foto ou não
-  atualizarFuncionario(func: Funcionario, cargo: number, foto?: File): any {
+  atualizarFuncionario(func: Funcionario, cargo: Cargo, foto?: File): any {
     func.cargo = cargo
     // se a foto não foi passada, atualizar apenas com os dados básicos
     if (foto == undefined) {

@@ -1,7 +1,9 @@
+import { Cargo } from "./cargo"
+
 export interface Funcionario {
   idFuncionario?: number
   nome: string
   email: string
   foto: string
-  cargo: number
+  cargo: Cargo
 }

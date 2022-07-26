@@ -16,9 +16,6 @@ export class TokenInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (request.headers.get("skip")){
-      return next.handle(request);
-    }
     const token = this.authService.recuperarToken()
     //console.log(request)
 
@@ -27,7 +24,7 @@ export class TokenInterceptor implements HttpInterceptor {
         headers: request.headers.set('Authorization', `Bearer ${token}`)
       })
       return next.handle(clone)
-    }
+    } 
 
     return next.handle(request);
   }
