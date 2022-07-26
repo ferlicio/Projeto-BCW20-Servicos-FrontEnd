@@ -23,6 +23,7 @@ export class AuthService {
       .pipe(
 
         tap((response) => {
+          
           this.armazenarToken(response.Authorization)
 
         })
