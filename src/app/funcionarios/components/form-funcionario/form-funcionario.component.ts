@@ -3,9 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { Cargo } from '../../models/cargo';
+import { Cargo } from '../../../cargos/models/cargo';
 import { Funcionario } from '../../models/funcionario';
-import { CargosService } from '../../services/cargo.service';
+import { CargosService } from '../../../cargos/services/cargo.service';
 import { FuncionarioService } from '../../services/funcionario.service';
 import { ConfirmarSaidaComponent } from '../confirmar-saida/confirmar-saida.component';
 

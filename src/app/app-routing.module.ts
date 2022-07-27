@@ -5,10 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'funcionarios',
-    loadChildren: () => import('./funcionarios/funcionarios.module').then(m => m.FuncionariosModule)
-  },
-  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'funcionarios'
@@ -18,12 +14,20 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'funcionarios',
+    loadChildren: () => import('./funcionarios/funcionarios.module').then(m => m.FuncionariosModule)
+  },
+  {
     path: 'pagamentos',
     loadChildren: () => import('./pagamentos/pagamentos.module').then(m => m.PagamentosModule)
   },
   {
     path: 'chamados',
     loadChildren: () => import('./chamados/chamados.module').then(m => m.ChamadosModule)
+  },
+  {
+    path: 'cargos',
+    loadChildren: () => import('./cargos/cargos.module').then(m => m.CargosModule)
   }
 ];
 
