@@ -4,7 +4,7 @@ import { BehaviorSubject, from, map, mergeMap, Observable, tap } from 'rxjs';
 import { Funcionario } from '../models/funcionario';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Cargo } from '../models/cargo';
+import { Cargo } from '../../cargos/models/cargo';
 
 @Injectable({
   providedIn: 'root'
