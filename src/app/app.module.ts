@@ -11,14 +11,11 @@ import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormClientesComponent } from './clientes/componentes/form-clientes/form-clientes.component';
-import { ListarClientesComponent } from './clientes/pages/listar-clientes/listar-clientes.component';
-import { ClientesComponent } from './clientes/pages/clientes/clientes.component';
+import { ListarCargosComponent } from './cargos/pages/listar-cargos/listar-cargos.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,

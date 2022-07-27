@@ -1,4 +1,4 @@
-import { Cargo } from "./cargo"
+import { Cargo } from "../../cargos/models/cargo"
 
 export interface Funcionario {
   idFuncionario?: number

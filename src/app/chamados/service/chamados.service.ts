@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cargo } from 'src/app/funcionarios/models/cargo';
+import { Cargo } from 'src/app/cargos/models/cargo';
 import { Chamado } from '../model/chamado';
 
 @Injectable({
