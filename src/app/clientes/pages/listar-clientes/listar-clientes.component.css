@@ -1,0 +1,42 @@
+.container {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+  }
+  
+  main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 20% 1fr;
+    padding: 16px;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+  
+  table {
+    height: fit-content;
+    width: 98%;
+  }
+  
+  .ativo {
+    color: red;
+  }
+  
+  #add {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+  }
+  
+  .content-before-table {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  

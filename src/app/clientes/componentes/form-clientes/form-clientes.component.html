@@ -1,0 +1,26 @@
+<div>
+    <h2 mat-dialog-title>Novo Cliente</h2>
+    <button type="" color="warn" mat-icon-button id="fechar" matTooltip="Salvar Cliente" (click)="confirmarSaida()">
+      <mat-icon> close </mat-icon>
+    </button>
+  
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoCliente"></mat-spinner>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formCliente" (ngSubmit)="salvar()">
+      
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input type="text" placeholder="Ex: João Pedro" matInput formControlName="nome">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input type="email" placeholder="Ex: seuemail@mail.com" matInput formControlName="email">
+      </mat-form-field>
+     
+  
+      <button type="submit" [disabled]="formCliente.invalid" mat-raised-button color="accent" id="salvar"
+        matTooltip="Salvar Cliente">Salvar</button>
+    </form>
+  </section>
