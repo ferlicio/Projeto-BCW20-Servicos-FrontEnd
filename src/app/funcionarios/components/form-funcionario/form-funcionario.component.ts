@@ -79,37 +79,28 @@ export class FormFuncionarioComponent implements OnInit {
   salvar(): void {
     this.salvandoFuncionario = true
     const f: Funcionario = this.formFuncionario.value
-    let obsSalvar: Observable<any>
 
     if (this.formFuncionario.value.foto.length > 0) {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect, this.foto)
-    } else {
-      obsSalvar = this.funcService.salvarFuncionario(f, this.cargoSelect, undefined)
-    }
-
-    obsSalvar.subscribe(
-      (resultado) => {
-        if (resultado instanceof Promise) {
-
-          resultado.then((obs$) => {
-
-            obs$.subscribe(
-              () => {
-                this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-                  duration: 3000
-                })
-                this.dialogRef.close()
-              }
-            )
-          })
-        } else {
-
+      this.funcService.salvarFuncionario(f, this.cargoSelect, this.foto).subscribe(
+        (next) => {
           this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
             duration: 3000
           })
           this.dialogRef.close()
-        }
-      }
-    )
+        },
+        error => console.log(error),
+
+      )
+    } else {
+      this.funcService.salvarFuncionario(f, this.cargoSelect, undefined).subscribe(
+        (next) => {
+          this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+            duration: 3000
+          })
+          this.dialogRef.close()
+        },
+        (error) => { console.log(error) }
+      )
+    }
   }
 }
