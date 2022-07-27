@@ -1,9 +1,9 @@
-import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChamadosService } from '../../service/chamados.service';
+import { Chamado } from '../../model/chamado';
 
 @Component({
   selector: 'app-listar-chamados',
@@ -12,14 +12,15 @@ import { ChamadosService } from '../../service/chamados.service';
 })
 export class ListarChamadosComponent implements OnInit {
 
-  displayedColumns: string[] = ['idChamado', 'titulo', 'descricao', 'dataEntrada', 'status', 'idFuncionario', 'idCliente', 'idPagamento', 'actions'];
+  displayedColumns: string[] = ['idChamado', 'titulo', 'descricao', 'dataEntrada', 'status', 'funcionario.nome', 'cliente.nome', 'pagamento.status', 'actions'];
 
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private chamadoService: ChamadosService) { }
+  constructor(private chamadoService: ChamadosService) {
+  }
 
   ngOnInit(): void {
     this.recuperarChamados();
@@ -28,10 +29,32 @@ export class ListarChamadosComponent implements OnInit {
   recuperarChamados() {
     this.chamadoService.getChamados().subscribe(
       chamados => {
-        this.dataSource = new MatTableDataSource(chamados)
         console.log(chamados)
+        this.dataSource = new MatTableDataSource(chamados)
         this.dataSource.paginator = this.paginator;
+        this.dataSource.filterPredicate = (chamado: Chamado, filter: string) => {
+          return chamado.funcionario.nome.toLocaleLowerCase().includes(filter) ||
+            chamado.pagamento.statusPagamento.toLocaleLowerCase().includes(filter) ||
+            chamado.titulo.toLocaleLowerCase().includes(filter) ||
+            chamado.descricao!.toLocaleLowerCase().includes(filter) ||
+            chamado.idChamado.toExponential().includes(filter) ||
+            chamado.status.toLocaleLowerCase().includes(filter) ||
+            chamado.dataEntrada.toLocaleLowerCase().includes(filter)
+        }
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'funcionario.nome': return item.funcionario.nome;
+            case 'cliente.nome': return item.cliente.nome;
+            case 'pagamento.status': return item.pagamento.statusPagamento;
+            default: return item[property];
+          }
+
+
+        }
+
         this.dataSource.sort = this.sort;
+
+
       },
 
       error => {
@@ -43,12 +66,14 @@ export class ListarChamadosComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
 }
 
 

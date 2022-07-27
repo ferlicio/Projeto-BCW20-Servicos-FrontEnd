@@ -37,17 +37,17 @@
                 <td mat-cell *matCellDef="let chamado"> {{chamado.status}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="idFuncionario">
+            <ng-container matColumnDef="funcionario.nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Funcionario </th>
                 <td mat-cell *matCellDef="let chamado"> {{chamado.funcionario.nome}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="idCliente">
+            <ng-container matColumnDef="cliente.nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
                 <td mat-cell *matCellDef="let chamado"> {{chamado.cliente.nome }} </td>
             </ng-container>
 
-            <ng-container matColumnDef="idPagamento">
+            <ng-container matColumnDef="pagamento.status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pagamento </th>
                 <td mat-cell *matCellDef="let chamado"> {{chamado.pagamento.statusPagamento}} </td>
             </ng-container>

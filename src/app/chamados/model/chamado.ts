@@ -1,11 +1,12 @@
 import { Funcionario } from '../../funcionarios/models/funcionario';
+import { Pagamentos } from '../../pagamentos/models/pagamentos';
 export interface Chamado {
     idChamado: number;
     titulo: string;
     descricao?: string,
-    dataEntrada: Date,
+    dataEntrada: string,
     status: string,
     idCliente: number,
-    idFuncionario: number,
-    idPagamento: number
+    funcionario: Funcionario,
+    pagamento: Pagamentos
 }
