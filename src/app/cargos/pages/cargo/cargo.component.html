@@ -1,0 +1,49 @@
+
+<div class="loader" *ngIf="cargo == undefined; else principal">
+    <p>{{ naoEncontrado == true ? 'Cargo não encontrado' : 'Procurando cargo...' }}</p>
+    <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
+  </div>
+  <ng-template #principal>
+    <mat-card>
+      <mat-card-header>
+        <img [src]="'/assets/no-profile.png'" mat-card-avatar>
+        <mat-card-title>{{ cargo.nome | titlecase }}</mat-card-title>
+        <button mat-icon-button color="primary" id="menu" [mat-menu-trigger-for]="menu" matTooltip="Mais opções">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/cargos" matTooltip="Voltar">
+            <mat-icon>arrow_back</mat-icon>
+            Voltar
+          </button>
+          <button mat-menu-item (click)="deletar()" matTooltip="Deletar cargo">
+            <mat-icon>delete</mat-icon>
+            Deletar Cargo
+          </button>
+        </mat-menu>
+      </mat-card-header>
+      <mat-card-content>
+        <form action="" [formGroup]="formCargo" (ngSubmit)="salvarAtualizacoes()">
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput placeholder="Novo nome" formControlName="nome">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <input type="text" matInput placeholder="Descrição do cargo" formControlName="descricao">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Salário</mat-label>
+            <input type="text" matInput placeholder="Salário" formControlName="salario">
+          </mat-form-field>
+  
+          <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar"
+            matTooltip="Salvar atualizações do funcionário" matTooltipPosition="above">Salvar
+            atualizações</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>

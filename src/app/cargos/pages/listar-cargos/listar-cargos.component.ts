@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { CargosService } from '../../services/cargo.service';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { ConfirmarDelecaoComponent } from '../../components/confirmar-delecao/confirmar-delecao.component';
+import { FormCargoComponent } from '../../components/form-cargo/form-cargo.component';
 import { Cargo } from '../../models/cargo';
+import { CargosService } from '../../services/cargo.service';
 
 @Component({
   selector: 'app-listar-cargos',
@@ -12,55 +15,81 @@ import { Cargo } from '../../models/cargo';
 })
 export class ListarCargosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'nome', 'descricao', 'salario', 'actions'];
+  cargos: Cargo[] = []
+  colunas: Array<string> = ['id', 'nome', 'descricao', 'salario', 'actions']
 
-  dataSource!: MatTableDataSource<any>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  constructor(private cargoService: CargosService) {
+  constructor(
+    private cargoService: CargosService,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
+    private title: Title,
+  ) {
   }
 
   ngOnInit(): void {
-    this.recuperarCargos();
-  }
-
-  recuperarCargos() {
-    this.cargoService.getCargos().subscribe(
-      cargos => {
-        console.log(cargos)
-        this.dataSource = new MatTableDataSource(cargos)
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.filterPredicate = (cargo: Cargo, filter: string) => {
-          return cargo.idCargo.toExponential().includes(filter) ||
-            cargo.nome.toLocaleLowerCase().includes(filter) ||
-            cargo.descricao!.toLocaleLowerCase().includes(filter) ||
-            cargo.salario.valueOf().toString().includes(filter) 
-        }
-        this.dataSource.sortingDataAccessor = (item, property) => {
-          switch (property) {
-            case 'funcionario.nome': return item.funcionario.nome;
-            case 'cliente.nome': return item.cliente.nome;
-            case 'pagamento.status': return item.pagamento.statusPagamento;
-            default: return item[property];
+    this.title.setTitle('Cargos')
+    this.cargoService.atualizarFuncionariosSub$
+      .subscribe(
+        (precisaAtualizar) => {
+          if (precisaAtualizar) {
+            this.recuperarCargos()
           }
         }
-        this.dataSource.sort = this.sort;
+      ) 
+  }
+
+  deletarCargo(carg: Cargo): void {
+
+    const dialogRef = this.dialog.open(ConfirmarDelecaoComponent)
+
+    dialogRef.afterClosed()
+      .subscribe(
+        (deletar) => {
+
+          if (deletar == true) {
+            this.cargoService.deleteCargo(carg)
+              .subscribe(
+                () => {
+                  this.snackbar.open('Funcionário deletado', 'Ok', {
+                    duration: 3000
+                  })
+                  this.recuperarCargos()
+                },
+                (error) => {
+                  this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
+                    duration: 3000
+                  })
+                  console.log(error)
+                }
+              )
+          }
+        }
+      )
+  }
+
+  recuperarCargos(): void {
+    this.cargoService.getCargos().subscribe(
+      (funcs) => { 
+        this.cargos = funcs
+
       },
-      error => {
-        console.log(error)
+      (erro) => {
+        console.log(erro)
+      },
+      () => {
+        console.log('Dados enviados com sucesso')
       }
     )
   }
 
+  abrirFormCargo(): void {
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue;
+    const referenciaDialog = this.dialog.open(FormCargoComponent, { disableClose: true })
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    referenciaDialog.afterClosed().subscribe(
+      () => {
+        this.recuperarCargos()
+      }
+    )
   }
 }

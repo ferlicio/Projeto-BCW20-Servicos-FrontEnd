@@ -6,11 +6,17 @@ import { SharedModuleModule } from '../components/shared-module.module';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CargosRoutingModule } from './cargos-routing.module';
+import { CargoComponent } from './pages/cargo/cargo.component';
+import { ConfirmarDelecaoComponent } from './components/confirmar-delecao/confirmar-delecao.component';
+import { FormCargoComponent } from './components/form-cargo/form-cargo.component';
 
 
 @NgModule({
   declarations: [
-    ListarCargosComponent
+    ListarCargosComponent,
+    CargoComponent,
+    ConfirmarDelecaoComponent,
+    FormCargoComponent
   ],
   imports: [
     CommonModule,

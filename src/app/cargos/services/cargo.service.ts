@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Cargo } from '../models/cargo';
 
@@ -10,6 +10,7 @@ import { Cargo } from '../models/cargo';
 export class CargosService {
 
   private readonly baseUrl: string = 'http://localhost:8080/servicos/cargos'
+  atualizarFuncionariosSub$: BehaviorSubject<boolean> = new BehaviorSubject(true)
 
   constructor(
     private http: HttpClient,
