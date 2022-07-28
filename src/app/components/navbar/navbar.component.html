@@ -10,7 +10,7 @@
         <span>Chamados</span>
       </button>
       <button mat-menu-item routerLink="/funcionarios">
-        <mat-icon>badge</mat-icon> 
+        <mat-icon>badge</mat-icon>
         <span>Funcionarios</span>
       </button>
       <button mat-menu-item routerLink="/cargos">
@@ -31,10 +31,6 @@
 
     <span class="separador"></span>
     <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'd/MM/yy, h:mm'}} </p>
-    <!--     <button mat-button [matMenuTriggerFor]="menuFuncionarios">Funcionários</button>
-    <mat-menu #menuFuncionarios="matMenu">
-      <a mat-menu-item routerLink="/funcionarios">Listar</a>
-    </mat-menu> -->
 
     <button mat-icon-button (click)="authService.signOut()" matTooltip="Deslogar">
       <mat-icon>logout</mat-icon>

@@ -16,26 +16,33 @@
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let f">
-          <a [routerLink]="'/funcionarios/' + f.idFuncionario" routerLinkActive="ativo" matTooltip="{{f.nome}}"
-            matTooltipPosition="above">
-            {{ f.nome }}
+          <a [routerLink]="'/funcionarios/' + f.idFuncionario" routerLinkActive="ativo"
+            matTooltip="{{f.nome | uppercase}}" matTooltipPosition="above">
+            {{ f.nome | uppercase}}
           </a>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef>E-mail</th>
-        <td mat-cell *matCellDef="let f">{{ f.email }}</td>
+        <td mat-cell *matCellDef="let f">{{ f.email | uppercase}}</td>
       </ng-container>
 
       <ng-container matColumnDef="cargo">
         <th mat-header-cell *matHeaderCellDef>Cargo</th>
-        <td mat-cell *matCellDef="let f">{{ f.cargo.nome }}</td>
+        <td mat-cell *matCellDef="let f">{{ f.cargo.nome | uppercase}}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Excluir</th>
         <td mat-cell *matCellDef="let f">
+
+          <a [routerLink]="'/funcionarios/' + f.idFuncionario" routerLinkActive="ativo">
+            <button mat-icon-button color="primary" matTooltip="Editar funcionario">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </a>
+
           <button mat-icon-button color="warn" (click)="deletarFuncionario(f)" matTooltip="Deletar funcionário">
             <mat-icon>delete</mat-icon>
           </button>

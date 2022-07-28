@@ -20,11 +20,3 @@ button {
   width: 300px;
   margin-bottom: 15px;
 }
-
-.btn-voltar {
-  width: 330px;
-}
-
-button:hover {
-  color: white;
-}

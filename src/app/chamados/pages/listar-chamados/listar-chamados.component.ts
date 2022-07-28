@@ -4,6 +4,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChamadosService } from '../../service/chamados.service';
 import { Chamado } from '../../model/chamado';
+import { FormChamadosComponent } from '../../components/form-chamados/form-chamados.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeletarChamadoComponent } from '../../components/deletar-chamado/deletar-chamado.component';
 
 @Component({
   selector: 'app-listar-chamados',
@@ -19,7 +23,10 @@ export class ListarChamadosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private chamadoService: ChamadosService) {
+  constructor(private chamadoService: ChamadosService,
+    private dialogChamado: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit(): void {
@@ -29,7 +36,7 @@ export class ListarChamadosComponent implements OnInit {
   recuperarChamados() {
     this.chamadoService.getChamados().subscribe(
       chamados => {
-        console.log(chamados)
+
         this.dataSource = new MatTableDataSource(chamados)
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = (chamado: Chamado, filter: string) => {
@@ -58,10 +65,40 @@ export class ListarChamadosComponent implements OnInit {
       },
 
       error => {
-        console.log(error)
+        this.snackBar.open("Erro ao recuperar chamados", "Ok", { duration: 3000 })
       }
     )
   }
+
+  excluirChamado(chamado: Chamado): void {
+
+    const dialogRef = this.dialogChamado.open(DeletarChamadoComponent)
+
+    dialogRef.afterClosed()
+      .subscribe(
+        (deletar) => {
+
+          if (deletar == true) {
+            this.chamadoService.deleteChamado(chamado.idChamado)
+              .subscribe(
+                () => {
+                  this.snackBar.open('Chamado deletado com sucesso', 'Ok', {
+                    duration: 3000
+                  })
+                  this.recuperarChamados()
+                },
+                (error) => {
+                  this.snackBar.open('Não foi possível deletar o chamado', 'Ok', {
+                    duration: 3000
+                  })
+                  console.log(error)
+                }
+              )
+          }
+        }
+      )
+  }
+
 
 
   applyFilter(event: Event) {
@@ -73,7 +110,14 @@ export class ListarChamadosComponent implements OnInit {
     }
   }
 
-
+  abrirFormChamado(): void {
+    const formDialog = this.dialogChamado.open(FormChamadosComponent)
+    formDialog.afterClosed().subscribe(
+      () => {
+        this.recuperarChamados
+      }
+    )
+  }
 }
 
 

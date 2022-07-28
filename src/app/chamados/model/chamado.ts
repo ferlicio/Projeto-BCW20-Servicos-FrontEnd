@@ -4,7 +4,7 @@ export interface Chamado {
     idChamado: number;
     titulo: string;
     descricao?: string,
-    dataEntrada: string,
+    dataEntrada: string
     status: string,
     idCliente: number,
     funcionario: Funcionario,

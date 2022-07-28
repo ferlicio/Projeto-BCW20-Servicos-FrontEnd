@@ -49,9 +49,7 @@ export class FormPagamentoComponent implements OnInit {
     this.salvandoPagamento = true
     const pagamento: Pagamentos = this.formularioPagamento.value
     const chamado: Chamado = this.formularioPagamento.value.chamado
-    /*     console.log(pagamento)
-        console.log('ESPAÇO');
-        console.log(chamado); */
+
     this.pagamentoService.postPagamento(pagamento, chamado.idChamado).subscribe(
       (t) => this.dialogRef.close()
     )

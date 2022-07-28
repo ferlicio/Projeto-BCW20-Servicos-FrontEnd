@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import { FormClientesComponent } from '../../componentes/form-clientes/form-clientes.component';
+import { FormClientesComponent } from '../../components/form-clientes/form-clientes.component';
+import { DelecaoClienteComponent } from '../../components/delecao-cliente/delecao-cliente.component';
 import { Clientes } from '../../models/clientes';
 import { ClientesService } from '../../service/clientes.service';
 
@@ -13,8 +14,8 @@ import { ClientesService } from '../../service/clientes.service';
 })
 export class ListarClientesComponent implements OnInit {
 
-clientes: Clientes[] = []
-colunas: Array<string> = ['id', 'nome', 'e-mail', 'endereço', 'actions']
+  clientes: Clientes[] = []
+  colunas: Array<string> = ['id', 'nome', 'e-mail', 'endereço', 'actions']
 
   constructor(
     private clienteService: ClientesService,
@@ -28,9 +29,9 @@ colunas: Array<string> = ['id', 'nome', 'e-mail', 'endereço', 'actions']
     this.clienteService.atualizarClientesSub$.subscribe((precisaAtualizar) => {
       if (precisaAtualizar) {
         this.recuperarCliente();
-      } 
+      }
     })
-     
+
 
   }
 
@@ -39,8 +40,8 @@ colunas: Array<string> = ['id', 'nome', 'e-mail', 'endereço', 'actions']
     this.clienteService.getClientes().subscribe(
       (clientes) => {
         this.clientes = clientes
-        
-      }, 
+
+      },
       (erro) => {
         console.log(erro)
       }
@@ -48,24 +49,42 @@ colunas: Array<string> = ['id', 'nome', 'e-mail', 'endereço', 'actions']
   }
 
 
-  abrirFormCliente(){
+  abrirFormCliente() {
     const formDialog = this.dialogCliente.open(FormClientesComponent)
     formDialog.afterClosed().subscribe(
-      ()=>{
+      () => {
         this.recuperarCliente()
       }
     )
   }
-  
 
-  deletarCliente(id: number){
-    this.clienteService.deleteCliente(id).subscribe(
-      ()=>{
-        this.snackbar.open('Cliente excluído com sucesso', 'Ok', {
-          duration:3000
-        })
-        this.recuperarCliente()
-      }
-    )
+
+  deletarCliente(cliente: Clientes) {
+
+    const dialogRef = this.dialogCliente.open(DelecaoClienteComponent)
+
+    dialogRef.afterClosed()
+      .subscribe(
+        (deletar) => {
+
+          if (deletar == true) {
+            this.clienteService.deleteCliente(cliente.idCliente)
+              .subscribe(
+                () => {
+                  this.snackbar.open('Cliente excluído com sucesso', 'Ok', {
+                    duration: 3000
+                  })
+                  this.recuperarCliente()
+                },
+                (error) => {
+                  this.snackbar.open('Não foi possível deletar o cliente', 'Ok', {
+                    duration: 3000
+                  })
+                  console.log(error)
+                }
+              )
+          }
+        }
+      )
   }
 }

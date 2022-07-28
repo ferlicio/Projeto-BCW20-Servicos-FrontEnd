@@ -5,7 +5,8 @@
 <ng-template #principal>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{ cargo.nome | titlecase }}</mat-card-title>
+      <mat-card-title>{{ cargo.nome |
+        uppercase }}</mat-card-title>
       <button mat-icon-button color="primary" id="menu" [mat-menu-trigger-for]="menu" matTooltip="Mais opções">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -39,7 +40,7 @@
         </mat-form-field>
 
         <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar"
-          matTooltip="Salvar atualizações do funcionário" matTooltipPosition="above">Salvar
+          matTooltip="Salvar atualizações do cargo" matTooltipPosition="above">Salvar
           atualizações</button>
       </form>
     </mat-card-content>

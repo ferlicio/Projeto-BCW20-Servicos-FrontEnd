@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cargo } from 'src/app/cargos/models/cargo';
 import { Chamado } from '../model/chamado';
+import { Clientes } from 'src/app/clientes/models/clientes';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,8 @@ export class ChamadosService {
     return this.http.put<Chamado>(`${this.baseUrl}/${chamado.idChamado}`, chamado)
   }
 
-  postCargo(chamado: Chamado) {
-    return this.http.post<Cargo>(`${this.baseUrl}`, chamado) //passar id cliente
-
+  postChamado(chamado: Chamado, idCliente: number) {
+    return this.http.post<Chamado>(`${this.baseUrl}/${idCliente}`, chamado)
   }
 
 }

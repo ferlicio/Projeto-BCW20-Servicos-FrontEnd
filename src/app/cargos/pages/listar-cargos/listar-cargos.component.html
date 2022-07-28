@@ -16,9 +16,10 @@
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let c">
-          <a [routerLink]="'/cargos/' + c.idCargo" routerLinkActive="ativo" matTooltip="{{c.nome}}"
-            matTooltipPosition="above">
-            {{ c.nome | titlecase }}
+          <a [routerLink]="'/cargos/' + c.idCargo" routerLinkActive="ativo" matTooltip="{{c.nome |
+            uppercase}}" matTooltipPosition="above">
+            {{ c.nome |
+            uppercase }}
           </a>
         </td>
       </ng-container>
@@ -34,8 +35,11 @@
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Excluir</th>
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
         <td mat-cell *matCellDef="let c">
+          <button mat-icon-button color="primary" matTooltip="Editar cargo" [routerLink]="'/cargos/' + c.idCargo">
+            <mat-icon>edit</mat-icon>
+          </button>
           <button mat-icon-button color="warn" (click)="deletarCargo(c)" matTooltip="Deletar cargo">
             <mat-icon>delete</mat-icon>
           </button>
