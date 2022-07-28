@@ -1,0 +1,45 @@
+<div>
+    <h2 mat-dialog-title>Novo Chamado</h2>
+    <button type="" color="warn" mat-icon-button id="fechar" matTooltip="Salvar Cliente" (click)="confirmarSaida()">
+        <mat-icon> close </mat-icon>
+    </button>
+
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoChamado"></mat-spinner>
+</div>
+<section mat-dialog-content>
+    <form action="" [formGroup]="formChamado">
+        <mat-form-field appearance="fill">
+            <mat-label>Título</mat-label>
+            <input type="text" placeholder="Ex: Fortmatação" matInput formControlName="titulo">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <input type="text" placeholder="Ex: Formatação do hd" matInput formControlName="descricao">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Data</mat-label>
+            <input type="date" placeholder="" matInput formControlName="dataEntrada">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option [value]="s" *ngFor="let s of status"> {{s}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Funcionário</mat-label>
+            <mat-select formControlName="funcionario">
+                <mat-option [value]="f" *ngFor="let f of funcionarios"> {{f.nome}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="idCliente">
+                <mat-option [value]=cliente.idCliente *ngFor="let cliente of clientes">{{cliente.nome}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="accent" id="salvar" matTooltip="Salvar Cliente"
+            (click)="salvar()">Salvar</button>
+    </form>
+</section>
