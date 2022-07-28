@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { FormPagamentoComponent } from '../../componentes/form-pagamento/form-pagamento.component';
 import { Pagamentos } from '../../models/pagamentos';
 import { PagamentosService } from '../../service/pagamentos.service';
 
@@ -16,7 +18,7 @@ export class ListarPagamentosComponent implements OnInit {
   pagamentos: Pagamentos[] = []
 
 
-  constructor(private pagamentoService: PagamentosService, private router: Router, private title: Title, private snack: MatSnackBar) { }
+  constructor(private pagamentoService: PagamentosService, private router: Router, private title: Title, private snack: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.title.setTitle('Pagamentos');
@@ -33,10 +35,19 @@ export class ListarPagamentosComponent implements OnInit {
     this.pagamentoService.getPagamentos().subscribe(
       (pagamentos) => {
         this.pagamentos = pagamentos
+        console.log(pagamentos[5]);
+
       },
       (erro) => {
         console.log(erro)
       }
+    )
+  }
+
+  abrirFormulario(): void {
+    const dialog = this.dialog.open(FormPagamentoComponent)
+    dialog.afterClosed().subscribe(
+      () => this.recuperarPagamentos()
     )
   }
 

@@ -14,6 +14,8 @@ import { PagamentosService } from '../../service/pagamentos.service';
 export class PagamentosComponent implements OnInit {
 
   pagamento!: Pagamentos
+  formas: string[] = ["A VISTA", "A PRAZO", "PARCELADO", "BOLETO", "CARTAO DE CREDITO"]
+  status: string[] = ["QUITADO", "LANCADO"]
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private title: Title, private pagamentoService: PagamentosService, private snack: MatSnackBar) { }
 
