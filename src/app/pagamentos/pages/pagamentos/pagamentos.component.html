@@ -3,14 +3,10 @@
     <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
 </div>
 <ng-template #principal>
-    <button class="btn-voltar" mat-menu-item routerLink="/pagamentos" >
-        <mat-icon routerLink="/pagamentos" matTooltip="Voltar">arrow_back</mat-icon>
 
-    </button>
     <mat-card>
         <mat-card-header>
             <mat-card-title> Pagamento nº. {{ pagamento.idPagamento }}</mat-card-title>
-            <mat-card-subtitle> Forma: {{ pagamento.formPagamento}}</mat-card-subtitle>
             <mat-card-subtitle> Status: {{ pagamento.statusPagamento }} </mat-card-subtitle>
 
 
@@ -25,12 +21,16 @@
 
                 <mat-form-field appearance="fill">
                     <mat-label>Forma Pagamento</mat-label>
-                    <input type="text" matInput placeholder="A vista/Credito" formControlName="formPagamento">
+                    <mat-select formControlName="formPagamento">
+                        <mat-option [value]="forma" *ngFor="let forma of formas"> {{forma}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Status Pagamento</mat-label>
-                    <input type="text" matInput placeholder="QUITADO/LANCADO" formControlName="statusPagamento">
+                    <mat-select formControlName="statusPagamento">
+                        <mat-option [value]="statu" *ngFor="let statu of status"> {{statu}} </mat-option>
+                    </mat-select>
                 </mat-form-field>
 
 

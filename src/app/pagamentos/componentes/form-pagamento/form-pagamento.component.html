@@ -1,0 +1,40 @@
+<div>
+    <h2 mat-dialog-title>Novo Pagamento</h2>
+    <button type="" color="warn" mat-icon-button id="fechar" matTooltip="Fechar Formulario" (click)="confirmarSaida()">
+        <mat-icon> close </mat-icon>
+    </button>
+
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoPagamento"></mat-spinner>
+</div>
+
+<section mat-dialog-content>
+    <form action="" [formGroup]="formularioPagamento" (ngSubmit)="salvar()">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Valor</mat-label>
+            <input type="number" placeholder="Ex: 1500" matInput formControlName="valor">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Forma Pagamento</mat-label>
+            <mat-select formControlName="formPagamento">
+                <mat-option [value]="forma" *ngFor="let forma of formas"> {{forma}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Status Pagamento</mat-label>
+            <mat-select formControlName="statusPagamento">
+                <mat-option [value]="statu" *ngFor="let statu of status"> {{statu}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Chamado</mat-label>
+            <mat-select required formControlName="chamado">
+                <mat-option [value]="chamado" *ngFor="let chamado of chamados">{{chamado.idChamado}} {{chamado.titulo}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="accent" id="salvar" matTooltip="Salvar Pagamento">Salvar</button>
+    </form>
+</section>

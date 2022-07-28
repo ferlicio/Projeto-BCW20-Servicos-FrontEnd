@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
 import { Cargo } from '../../../cargos/models/cargo';
 import { CargosService } from '../../../cargos/services/cargo.service';
+import { ConfirmarSaidaComponent } from 'src/app/funcionarios/components/confirmar-saida/confirmar-saida.component';
 
 @Component({
   selector: 'app-form-cargo',
@@ -33,7 +33,7 @@ export class FormCargoComponent implements OnInit {
   }
 
 
-/*   confirmarSaida() {
+  confirmarSaida() {
     this.dialog.open(ConfirmarSaidaComponent).afterClosed().subscribe(
       (res) => {
         if (res == true) {
@@ -41,22 +41,22 @@ export class FormCargoComponent implements OnInit {
         }
       }
     )
-  } */
+  }
 
   salvar(): void {
     this.salvandoCargo = true
     const c: Cargo = this.formCargo.value
 
-      this.cargoService.salvarCargo(c).subscribe(
-        (next) => {
-          this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
-            duration: 3000
-          })
-          this.dialogRef.close()
-        },
-        (error) => { console.log(error) }
-      )
-    }
-  
+    this.cargoService.salvarCargo(c).subscribe(
+      (next) => {
+        this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+          duration: 3000
+        })
+        this.dialogRef.close()
+      },
+      (error) => { console.log(error) }
+    )
+  }
+
 
 }

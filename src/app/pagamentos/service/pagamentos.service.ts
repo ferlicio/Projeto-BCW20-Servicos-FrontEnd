@@ -28,8 +28,8 @@ export class PagamentosService {
     return this.http.delete(`${this.baseurl}/${id}`)
   }
 
-  postPagamento(pagamento: Pagamentos, cargo: number) {
-    return this.http.post<Pagamentos>(`${this.baseurl}/${cargo}`, pagamento).pipe(tap(() => this.atualizarPagamentosSub$.next(true)))
+  postPagamento(pagamento: Pagamentos, chamado: number) {
+    return this.http.post<Pagamentos>(`${this.baseurl}/${chamado}`, pagamento).pipe(tap(() => this.atualizarPagamentosSub$.next(true)))
   }
 
   putPagamento(pagamento: Partial<Pagamentos>) {
