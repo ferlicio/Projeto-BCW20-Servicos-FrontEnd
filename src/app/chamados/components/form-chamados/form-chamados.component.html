@@ -24,19 +24,22 @@
         <mat-form-field appearance="fill">
             <mat-label>Status</mat-label>
             <mat-select formControlName="status">
-                <mat-option [value]="s" *ngFor="let s of status"> {{s}}</mat-option>
+                <mat-option [value]="s" *ngFor="let s of status"> {{s |
+                    uppercase}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Funcionário</mat-label>
             <mat-select formControlName="funcionario">
-                <mat-option [value]="f" *ngFor="let f of funcionarios"> {{f.nome}}</mat-option>
+                <mat-option [value]="f" *ngFor="let f of funcionarios"> {{f.nome |
+                    uppercase}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Cliente</mat-label>
             <mat-select formControlName="idCliente">
-                <mat-option [value]=cliente.idCliente *ngFor="let cliente of clientes">{{cliente.nome}}</mat-option>
+                <mat-option [value]=cliente.idCliente *ngFor="let cliente of clientes">{{cliente.nome |
+                    uppercase}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button type="submit" mat-raised-button color="accent" id="salvar" matTooltip="Salvar Cliente"

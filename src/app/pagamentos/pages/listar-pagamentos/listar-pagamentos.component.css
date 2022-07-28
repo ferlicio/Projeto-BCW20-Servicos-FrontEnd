@@ -30,12 +30,6 @@ table {
   bottom: 16px;
 }
 
-.content-before-table {
-  display: flex;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
 a {
   text-decoration: none;
 }

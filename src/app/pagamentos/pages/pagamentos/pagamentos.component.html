@@ -22,14 +22,14 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Forma Pagamento</mat-label>
                     <mat-select formControlName="formPagamento">
-                        <mat-option [value]="forma" *ngFor="let forma of formas"> {{forma}}</mat-option>
+                        <mat-option [value]="forma" *ngFor="let forma of formas"> {{forma | uppercase}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Status Pagamento</mat-label>
                     <mat-select formControlName="statusPagamento">
-                        <mat-option [value]="statu" *ngFor="let statu of status"> {{statu}} </mat-option>
+                        <mat-option [value]="statu" *ngFor="let statu of status"> {{statu | uppercase}} </mat-option>
                     </mat-select>
                 </mat-form-field>
 

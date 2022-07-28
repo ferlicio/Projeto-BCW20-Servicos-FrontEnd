@@ -35,8 +35,6 @@ export class ListarPagamentosComponent implements OnInit {
     this.pagamentoService.getPagamentos().subscribe(
       (pagamentos) => {
         this.pagamentos = pagamentos
-        console.log(pagamentos[5]);
-
       },
       (erro) => {
         console.log(erro)
