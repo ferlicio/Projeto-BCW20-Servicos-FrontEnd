@@ -30,23 +30,23 @@ export class FuncionarioComponent implements OnInit {
   })
 
   imagePreview: string = ''
-  foto!: File // undefined
+  foto!: File
   desabilitar: boolean = true
   naoEncontrado: boolean = false
 
   constructor(
-    private route: ActivatedRoute, // acessar os parâmetros da rota ativa
+    private route: ActivatedRoute, 
     private funcService: FuncionarioService,
     private cargoService: CargosService,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
+    private router: Router, 
     private title: Title
   ) { }
 
   ngOnInit(): void {
-    // let idFuncionario = this.route.snapshot.paramMap.get('idFuncionario')
+  
     this.route.paramMap.subscribe(
       (params) => {
         let idFuncionario = parseInt(params.get('idFuncionario') ?? '0')
@@ -61,18 +61,9 @@ export class FuncionarioComponent implements OnInit {
     this.funcService.getFuncionarioById(id)
       .subscribe(
         func => {
-          //1° pegar o funcionário que foi retornado e colocar dentro da propriedade funcionario
           this.recuperarCargos()
           this.funcionario = func
-          /* console.log(this.funcionario.cargo) */
 
-          // 2° pegar os dados do funcionário e atribuir esses valores aos seus respectivos campos
-          // no formulário
-
-          /**
-           * setValue() é responsável por pegar os valores que foram passados para ela
-           * e colocar dentro dos formControls
-           */
 
           this.formFuncionario.setValue({
             nome: this.funcionario.nome,
@@ -80,8 +71,6 @@ export class FuncionarioComponent implements OnInit {
             foto: '',
             cargo: this.funcionario.cargo.idCargo
           })
-
-          // 3° carregar o preview da imagem
           this.imagePreview = this.funcionario.foto
 
           this.valorMudou()
@@ -96,9 +85,9 @@ export class FuncionarioComponent implements OnInit {
   recuperarFoto(event: any): void {
     this.foto = event.target.files[0]
 
-    const reader = new FileReader() // objeto do js que faz leitura de arquivos
+    const reader = new FileReader()
 
-    reader.readAsDataURL(this.foto) // ler o arquivo e gerar um link local para o acesso do conteúdo daquele arquivo
+    reader.readAsDataURL(this.foto)
 
     reader.onload = () => {
       this.imagePreview = reader.result as string
@@ -115,33 +104,22 @@ export class FuncionarioComponent implements OnInit {
   }
 
   valorMudou() {
-    /**
-     * valueChanges é uma propriedade dos FormGroups
-     * que é um observable que quando um valor do seu formulário
-     * altera, esse observable te retorna essa modificação
-     */
+
     this.formFuncionario.valueChanges
       .subscribe(
-        /**
-         * o parâmetro valores é um objeto que é retornado te informando
-         * o valor de cada campo do seu reative forms
-         */
+
         (valores) => {
-          /**
-           * o botão será desabilitado se as validações do formulário estiverem inválidas
-           * ou se o valor de algum campo do formulário estiver diferente do valor de alguma
-           * propriedade do objeto funcionário
-           */
+
           this.desabilitar = this.formFuncionario.invalid || !(valores.nome != this.funcionario.nome || valores.email != this.funcionario.email || valores.foto.length > 0 || valores.cargo != this.funcionario.cargo.idCargo)
         }
       )
   }
 
   salvarAtualizacoes() {
-    const f: Funcionario = { ...this.formFuncionario.value, cargo:{ idCargo:this.formFuncionario.value.cargo } }
+    const f: Funcionario = { ...this.formFuncionario.value, cargo: { idCargo: this.formFuncionario.value.cargo } }
     f.idFuncionario = this.funcionario.idFuncionario
     f.foto = this.funcionario.foto
-      
+
     const temFoto = this.formFuncionario.value.foto.length > 0
     const obsSalvar: Observable<any> = this.funcService.atualizarFuncionario(f, f.cargo, temFoto ? this.foto : undefined)
 

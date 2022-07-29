@@ -78,7 +78,6 @@ export class ListarFuncionariosComponent implements OnInit {
         console.log(erro)
       },
       () => {
-        console.log('Dados enviados com sucesso')
       }
     )
   }

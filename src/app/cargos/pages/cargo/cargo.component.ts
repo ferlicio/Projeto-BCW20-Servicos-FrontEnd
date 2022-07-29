@@ -28,14 +28,14 @@ export class CargoComponent implements OnInit {
   desabilitar: boolean = true
   naoEncontrado: boolean = false
 
-  constructor(    
-  private route: ActivatedRoute, // acessar os parâmetros da rota ativa
-  private cargoService: CargosService,
-  private fb: FormBuilder,
-  private snackbar: MatSnackBar,
-  private dialog: MatDialog,
-  private router: Router, // serve para fazer o redirecionamento entre as páginas do app pelo ts
-  private title: Title) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private cargoService: CargosService,
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router, 
+    private title: Title) { }
 
   ngOnInit(): void {
 
@@ -75,9 +75,9 @@ export class CargoComponent implements OnInit {
         }
       )
   }
-  
+
   salvarAtualizacoes() {
-    const c: Cargo = { ...this.formCargo.value}
+    const c: Cargo = { ...this.formCargo.value }
     c.idCargo = this.cargo.idCargo
 
     const obsSalvar: Observable<any> = this.cargoService.atualizarCargo(c)
@@ -92,7 +92,6 @@ export class CargoComponent implements OnInit {
                   this.snackbar.open('Cargo salvo com sucesso', 'Ok', {
                     duration: 3000
                   })
-                  console.log("YOLO")
                   this.recuperarCargo(func.idCargo)
                 }
               )
