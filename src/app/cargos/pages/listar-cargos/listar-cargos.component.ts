@@ -35,7 +35,7 @@ export class ListarCargosComponent implements OnInit {
             this.recuperarCargos()
           }
         }
-      ) 
+      )
   }
 
   deletarCargo(carg: Cargo): void {
@@ -69,7 +69,7 @@ export class ListarCargosComponent implements OnInit {
 
   recuperarCargos(): void {
     this.cargoService.getCargos().subscribe(
-      (funcs) => { 
+      (funcs) => {
         this.cargos = funcs
 
       },

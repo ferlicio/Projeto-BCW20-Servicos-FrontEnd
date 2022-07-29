@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeletarChamadoComponent } from '../../components/deletar-chamado/deletar-chamado.component';
 import { AlterarChamadoComponent } from '../../components/alterar-chamado/alterar-chamado.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listar-chamados',
@@ -26,12 +27,14 @@ export class ListarChamadosComponent implements OnInit {
 
   constructor(private chamadoService: ChamadosService,
     private dialogChamado: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private title: Title
   ) {
   }
 
   ngOnInit(): void {
     this.recuperarChamados();
+    this.title.setTitle("Chamados")
   }
 
   recuperarChamados() {

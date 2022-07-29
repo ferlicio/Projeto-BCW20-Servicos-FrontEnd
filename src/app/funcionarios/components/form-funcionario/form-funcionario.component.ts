@@ -7,7 +7,7 @@ import { Cargo } from '../../../cargos/models/cargo';
 import { Funcionario } from '../../models/funcionario';
 import { CargosService } from '../../../cargos/services/cargo.service';
 import { FuncionarioService } from '../../services/funcionario.service';
-import { ConfirmarSaidaComponent } from '../confirmar-saida/confirmar-saida.component';
+import { ConfirmarSaidaComponent } from '../../../components/confirmar-saida/confirmar-saida.component';
 
 @Component({
   selector: 'app-form-funcionario',

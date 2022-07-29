@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Clientes } from 'src/app/clientes/models/clientes';
 import { ClientesService } from 'src/app/clientes/service/clientes.service';
-import { ConfirmarSaidaComponent } from 'src/app/funcionarios/components/confirmar-saida/confirmar-saida.component';
+import { ConfirmarSaidaComponent } from 'src/app/components/confirmar-saida/confirmar-saida.component';
 import { Funcionario } from 'src/app/funcionarios/models/funcionario';
 import { FuncionarioService } from 'src/app/funcionarios/services/funcionario.service';
 import { Chamado } from '../../model/chamado';
@@ -75,7 +75,7 @@ export class FormChamadosComponent implements OnInit {
     console.log(f)
     this.chamadosService.postChamado(f, this.formChamado.value.idCliente).subscribe(
       success => {
-        this.snackbar.open('Cliente salvo com sucesso', 'Ok', {
+        this.snackbar.open('Chamado salvo com sucesso', 'Ok', {
           duration: 3000
         })
         this.dialogRef.close()

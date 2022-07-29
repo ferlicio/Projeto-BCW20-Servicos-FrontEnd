@@ -4,6 +4,6 @@ export interface Clientes {
     idCliente: number
     nome: string
     email: string
-    enderecoCliente: string
+    enderecoCliente: EnderecoCliente
 
 }
