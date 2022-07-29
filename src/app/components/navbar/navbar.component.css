@@ -1,10 +1,6 @@
-
-
 mat-toolbar-row {
   display: flex;
   align-items: center;
-  
-  
 }
 
 .separador {
@@ -17,32 +13,32 @@ p {
 }
 
 h1 {
-  padding-left: 4vh;
+  color: #fff;
 }
 
-.logout-button{
+.logout-button {
   align-items: flex-end;
+  color: #ffd900;
 }
 
+mat-toolbar {
+  color: #fff !important;
+  background-color: #0f637a !important;
+}
 
-
+#menu {
+  color: #ffd900;
+  padding-right: 4vh;
+}
 
 @media (max-width: 900px) {
- 
-  p{
+  p {
     display: none;
   }
- 
 }
 
-
 @media (max-width: 600px) {
- 
   mat-toolbar {
-   min-width: 600px;
-   
+    min-width: 600px;
   }
-
-  
-  
 }

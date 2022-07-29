@@ -2,18 +2,20 @@
   height: 100vh;
   display: grid;
   grid-template-rows: 1fr;
+  background-color: #0f637a;
+  color: #ffff;
   grid-template-columns: 1fr 500px;
 }
 
 .image-container {
-  background-image: url(/assets/rocket.gif);
+  background-image: url(/assets/16teste2.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 400px;
 }
 
 .form-container {
-  border-left: 5px solid #3f51b5;
+  border-left: 5px solid #ffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,4 +33,16 @@ ngx-recaptcha2 {
   display: flex;
   justify-content: center;
   padding-bottom: 21px;
+}
+
+button {
+  background-color: #ffd900;
+}
+
+mat-label {
+  color: #ffff;
+}
+
+h1 {
+  text-align: center;
 }
