@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Chamado } from 'src/app/chamados/model/chamado';
 import { ChamadosService } from 'src/app/chamados/service/chamados.service';
 import { PagamentosService } from '../../service/pagamentos.service';
-import { ConfirmarSaidaComponent } from '../../../funcionarios/components/confirmar-saida/confirmar-saida.component';
+import { ConfirmarSaidaComponent } from '../../../components/confirmar-saida/confirmar-saida.component';
 import { Pagamentos } from '../../models/pagamentos';
 
 @Component({

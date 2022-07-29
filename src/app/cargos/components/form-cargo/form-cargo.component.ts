@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cargo } from '../../../cargos/models/cargo';
 import { CargosService } from '../../../cargos/services/cargo.service';
-import { ConfirmarSaidaComponent } from 'src/app/funcionarios/components/confirmar-saida/confirmar-saida.component';
+import { ConfirmarSaidaComponent } from 'src/app/components/confirmar-saida/confirmar-saida.component';
 
 @Component({
   selector: 'app-form-cargo',

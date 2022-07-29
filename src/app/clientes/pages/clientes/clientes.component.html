@@ -23,8 +23,25 @@
                     <input type="email" matInput placeholder="email@email.com" formControlName="email">
                 </mat-form-field>
 
+                <mat-form-field appearance="fill">
+                    <mat-label>Rua</mat-label>
+                    <input type="text" placeholder="Ex: Rua Exemplo" matInput formControlName="rua">
+                </mat-form-field>
 
+                <mat-form-field appearance="fill">
+                    <mat-label>Bairro</mat-label>
+                    <input type="text" placeholder="Ex: Lagoa Redonda" matInput formControlName="bairro">
+                </mat-form-field>
 
+                <mat-form-field appearance="fill">
+                    <mat-label>Cidade</mat-label>
+                    <input type="text" placeholder="Ex: Fortaleza" matInput formControlName="cidade">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>UF</mat-label>
+                    <input type="text" placeholder="Ex: CE" matInput formControlName="uf">
+                </mat-form-field>
 
                 <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar"
                     matTooltip="Salvar atualizações do cliente" matTooltipPosition="above">Salvar

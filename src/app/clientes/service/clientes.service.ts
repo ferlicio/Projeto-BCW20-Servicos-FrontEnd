@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, mergeMap, tap } from 'rxjs';
 import { Clientes } from '../models/clientes';
+import { EnderecoCliente } from '../models/enderecoCliente';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,12 @@ export class ClientesService {
 
 
   private readonly baseurl: string = 'http://localhost:8080/servicos/clientes'
+  private readonly baseurl2: string = 'http://localhost:8080/servicos/enderecoCliente'
 
 
   constructor(private http: HttpClient) { }
 
-  getClientes(){
+  getClientes() {
     return this.http.get<Clientes[]>(this.baseurl);
   }
 
@@ -28,12 +30,22 @@ export class ClientesService {
     return this.http.delete(`${this.baseurl}/${id}`)
   }
 
-  postCliente(cliente: Clientes) {
-    return this.http.post<Clientes>(`${this.baseurl}`, cliente)
+  postCliente(cliente: Clientes, endereco: EnderecoCliente) {
+    return this.http.post<Clientes>(`${this.baseurl}`, cliente).pipe(mergeMap(
+      (a) => {
+        return this.http.post<EnderecoCliente>(`${this.baseurl2}/${a.idCliente}`, endereco)
+      }
+    ))
   }
 
-  putCliente(cliente: Partial<Clientes>) {
-    return this.http.put<Clientes>(`${this.baseurl}/${cliente.idCliente}`, cliente).pipe(tap(() => this.atualizarClientesSub$.next(true)))
+  putCliente(cliente: Clientes, endereco: EnderecoCliente) {
+    return this.http.put<EnderecoCliente>(`${this.baseurl2}/${cliente.idCliente}`, endereco).pipe(mergeMap(
+      (a) => {
+        cliente.enderecoCliente = a
+        return this.http.put<Clientes>(`${this.baseurl}/${cliente.idCliente}`, cliente).pipe(tap(() => this.atualizarClientesSub$.next(true)))
+      }
+    ))
+
   }
 
 }

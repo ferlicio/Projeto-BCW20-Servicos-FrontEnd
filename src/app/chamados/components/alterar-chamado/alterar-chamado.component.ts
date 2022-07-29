@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Clientes } from 'src/app/clientes/models/clientes';
-import { ConfirmarSaidaComponent } from 'src/app/funcionarios/components/confirmar-saida/confirmar-saida.component';
+import { ConfirmarSaidaComponent } from 'src/app/components/confirmar-saida/confirmar-saida.component';
 import { Funcionario } from 'src/app/funcionarios/models/funcionario';
 import { FuncionarioService } from 'src/app/funcionarios/services/funcionario.service';
 import { Chamado } from '../../model/chamado';
 import { ChamadosService } from '../../service/chamados.service';
 import { Pagamentos } from '../../../pagamentos/models/pagamentos';
-import { PagamentosService } from '../../../pagamentos/service/pagamentos.service';
+
 
 @Component({
   selector: 'app-alterar-chamado',

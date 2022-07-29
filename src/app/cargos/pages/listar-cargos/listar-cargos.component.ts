@@ -35,7 +35,7 @@ export class ListarCargosComponent implements OnInit {
             this.recuperarCargos()
           }
         }
-      ) 
+      )
   }
 
   deletarCargo(carg: Cargo): void {
@@ -50,13 +50,13 @@ export class ListarCargosComponent implements OnInit {
             this.cargoService.deleteCargo(carg)
               .subscribe(
                 () => {
-                  this.snackbar.open('Funcionário deletado', 'Ok', {
+                  this.snackbar.open('Cargo deletado', 'Ok', {
                     duration: 3000
                   })
                   this.recuperarCargos()
                 },
                 (error) => {
-                  this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
+                  this.snackbar.open('Não foi possível deletar o cargo', 'Ok', {
                     duration: 3000
                   })
                   console.log(error)
@@ -69,7 +69,7 @@ export class ListarCargosComponent implements OnInit {
 
   recuperarCargos(): void {
     this.cargoService.getCargos().subscribe(
-      (funcs) => { 
+      (funcs) => {
         this.cargos = funcs
 
       },
