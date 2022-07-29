@@ -1,0 +1,37 @@
+<div>
+    <h2 mat-dialog-title>Novo Chamado</h2>
+    <button type="" color="warn" mat-icon-button id="fechar" matTooltip="Salvar Cliente" (click)="confirmarSaida()">
+        <mat-icon> close </mat-icon>
+    </button>
+
+</div>
+<section mat-dialog-content>
+    <form action="" [formGroup]="formChamado" (ngSubmit)="salvar()">
+        <mat-form-field appearance="fill">
+            <mat-label>Título</mat-label>
+            <input type="text" placeholder="Ex: Formatação" matInput formControlName="titulo">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <input type="text" placeholder="Ex: Formatação do hd" matInput formControlName="descricao">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option [value]="s" *ngFor="let s of status"> {{s |
+                    uppercase}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Funcionário</mat-label>
+            <mat-select formControlName="funcionario">
+                <mat-option [value]="f.idFuncionario" *ngFor="let f of funcionarios"> {{f.nome |
+                    uppercase}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="accent" id="salvar" matTooltip="Salvar Chamado"
+            [disabled]="desabilitar">Salvar</button>
+    </form>
+</section>

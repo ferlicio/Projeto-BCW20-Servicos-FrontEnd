@@ -22,3 +22,12 @@ table {
   right: 16px;
   bottom: 16px;
 }
+
+.barra-pesquisa {
+  width: 300px;
+
+  text-align: center;
+
+  border-radius: 1px;
+  margin: 2vh 0;
+}

@@ -7,15 +7,17 @@ import { SharedModuleModule } from '../components/shared-module.module';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChamadosRoutingModule } from './chamados-routing.module';
-import { FormChamadosComponent } from './components/form-chamados/form-chamados.component';
+import { FormChamadosComponent } from './components/form-adicionar-chamados/form-chamados.component';
 import { DeletarChamadoComponent } from './components/deletar-chamado/deletar-chamado.component';
+import { AlterarChamadoComponent } from './components/alterar-chamado/alterar-chamado.component';
 
 @NgModule({
   declarations: [
     ListarChamadosComponent,
     ChamadosComponent,
     FormChamadosComponent,
-    DeletarChamadoComponent
+    DeletarChamadoComponent,
+    AlterarChamadoComponent
   ],
   imports: [
     CommonModule,
