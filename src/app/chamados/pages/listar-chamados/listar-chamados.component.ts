@@ -56,7 +56,8 @@ export class ListarChamadosComponent implements OnInit {
             chamado.descricao!.toLocaleLowerCase().includes(filter) ||
             chamado.idChamado.toExponential().includes(filter) ||
             chamado.status.toLocaleLowerCase().includes(filter) ||
-            chamado.dataEntrada.toLocaleLowerCase().includes(filter)
+            chamado.dataEntrada.toLocaleLowerCase().includes(filter)||
+            chamado.cliente.nome.toLocaleLowerCase().includes(filter) 
         }
         this.dataSource.sortingDataAccessor = (item, property) => {
           switch (property) {

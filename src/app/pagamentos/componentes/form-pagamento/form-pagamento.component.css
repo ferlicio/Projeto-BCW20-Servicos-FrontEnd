@@ -17,3 +17,12 @@ div {
 #fechar {
   float: left;
 }
+
+@media (max-width: 560px){
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+  }
+}

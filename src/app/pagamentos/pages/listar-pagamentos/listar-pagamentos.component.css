@@ -33,3 +33,15 @@ table {
 a {
   text-decoration: none;
 }
+@media screen and (max-width: 1700px) {
+ 
+  main {
+    display:flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+  
+}
