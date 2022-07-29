@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Cargo } from '../models/cargo';
 
@@ -10,7 +10,7 @@ import { Cargo } from '../models/cargo';
 export class CargosService {
 
   private readonly baseUrl: string = 'http://localhost:8080/servicos/cargos'
-  atualizarFuncionariosSub$: BehaviorSubject<boolean> = new BehaviorSubject(true)
+  atualizarCargosSub$: BehaviorSubject<boolean> = new BehaviorSubject(true)
 
   constructor(
     private http: HttpClient,
@@ -27,14 +27,29 @@ export class CargosService {
 
   salvarCargo(cargo: Cargo): Observable<Cargo> {
     return this.http.post<Cargo>(this.baseUrl, cargo)
+    .pipe(
+      tap((cargo) => {
+        this.atualizarCargosSub$.next(true)
+      })
+    )
   } 
 
   atualizarCargo(cargo: Cargo): Observable<Cargo> {
       return this.http.put<Cargo>(`${this.baseUrl}/${cargo.idCargo}`, cargo)
+      .pipe(
+        tap((cargo) => {
+          this.atualizarCargosSub$.next(true)
+        })
+      )
   }
 
   deleteCargo(cargo: Cargo): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${cargo.idCargo}`)
+    .pipe(
+      tap((cargo) => {
+        this.atualizarCargosSub$.next(true)
+      })
+    )
   }
   
 }

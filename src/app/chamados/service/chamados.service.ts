@@ -34,7 +34,6 @@ export class ChamadosService {
         mergeMap(func => {
 
           chamado.funcionario = func;
-          console.log(chamado.funcionario);
 
           return this.http.put<Chamado>(`${this.baseUrl}/${idChamado}`, chamado)
         })
