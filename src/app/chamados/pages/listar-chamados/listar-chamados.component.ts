@@ -40,7 +40,13 @@ export class ListarChamadosComponent implements OnInit {
   recuperarChamados() {
     this.chamadoService.getChamados().subscribe(
       chamados => {
-
+        chamados = chamados.map((x) => {
+          if (x.pagamento == null) {
+            x.pagamento = { idPagamento: 999999, valor: 0, formPagamento: 'não existe', statusPagamento: 'não cadastrado' }
+            return x;
+          }
+          return x;
+        })
         this.dataSource = new MatTableDataSource(chamados)
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = (chamado: Chamado, filter: string) => {
@@ -59,12 +65,9 @@ export class ListarChamadosComponent implements OnInit {
             case 'pagamento.status': return item.pagamento.statusPagamento;
             default: return item[property];
           }
-
-
         }
 
         this.dataSource.sort = this.sort;
-
 
       },
 
@@ -73,6 +76,8 @@ export class ListarChamadosComponent implements OnInit {
       }
     )
   }
+
+
 
   excluirChamado(chamado: Chamado): void {
 
@@ -134,5 +139,3 @@ export class ListarChamadosComponent implements OnInit {
     )
   }
 }
-
-

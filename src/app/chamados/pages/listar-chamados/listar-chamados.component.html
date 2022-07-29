@@ -49,7 +49,7 @@
             <ng-container matColumnDef="pagamento.status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pagamento </th>
                 <td mat-cell *matCellDef="let chamado">
-                    <div *ngIf="chamado.pagamento == null; else teste">Não Atribuído</div>
+                    <div *ngIf="chamado.pagamento == null; else teste"> </div>
                     <ng-template #teste> {{ chamado.pagamento.statusPagamento | uppercase }}</ng-template>
                 </td>
             </ng-container>

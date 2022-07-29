@@ -85,6 +85,9 @@ export class AlterarChamadoComponent implements OnInit {
 
     f.idChamado = this.chamado.idChamado
     f.dataEntrada = this.chamado.dataEntrada
+    if (this.chamado.pagamento.idPagamento != 999999) {
+      f.pagamento = this.chamado.pagamento
+    }
 
     this.chamadosService.putChamado(f, f.idChamado, idFunc).subscribe(
       success => {
