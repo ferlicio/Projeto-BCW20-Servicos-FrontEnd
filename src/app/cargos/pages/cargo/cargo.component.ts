@@ -89,7 +89,7 @@ export class CargoComponent implements OnInit {
             resultado
               .subscribe(
                 (func) => {
-                  this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+                  this.snackbar.open('Cargo salvo com sucesso', 'Ok', {
                     duration: 3000
                   })
 
@@ -98,7 +98,7 @@ export class CargoComponent implements OnInit {
               )
           }
 
-          this.snackbar.open('Funcionário salvo com sucesso', 'Ok', {
+          this.snackbar.open('Cargo salvo com sucesso', 'Ok', {
             duration: 3000
           })
 
@@ -116,11 +116,11 @@ export class CargoComponent implements OnInit {
             this.cargoService.deleteCargo(this.cargo)
               .subscribe(
                 () => {
-                  this.snackbar.open('Funcionário deletado', 'Ok', {
+                  this.snackbar.open('Cargo deletado', 'Ok', {
                     duration: 3000
                   })
 
-                  this.router.navigateByUrl('/funcionarios')
+                  this.router.navigateByUrl('/cargos')
                 }
               )
           }

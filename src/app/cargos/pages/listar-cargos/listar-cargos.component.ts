@@ -28,7 +28,7 @@ export class ListarCargosComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Cargos')
-    this.cargoService.atualizarFuncionariosSub$
+    this.cargoService.atualizarCargosSub$
       .subscribe(
         (precisaAtualizar) => {
           if (precisaAtualizar) {
@@ -50,13 +50,13 @@ export class ListarCargosComponent implements OnInit {
             this.cargoService.deleteCargo(carg)
               .subscribe(
                 () => {
-                  this.snackbar.open('Funcionário deletado', 'Ok', {
+                  this.snackbar.open('Cargo deletado', 'Ok', {
                     duration: 3000
                   })
                   this.recuperarCargos()
                 },
                 (error) => {
-                  this.snackbar.open('Não foi possível deletar o funcionário', 'Ok', {
+                  this.snackbar.open('Não foi possível deletar o cargo', 'Ok', {
                     duration: 3000
                   })
                   console.log(error)
