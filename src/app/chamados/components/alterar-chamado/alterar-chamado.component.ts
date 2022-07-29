@@ -111,7 +111,6 @@ export class AlterarChamadoComponent implements OnInit {
 
       .subscribe(
         (valores) => {
-          console.log(valores);
 
           this.desabilitar = this.formChamado.invalid || !(valores.titulo != this.chamado.titulo || valores.descricao != this.chamado.descricao || valores.status !=
             this.chamado.status || valores.funcionario != this.chamado.funcionario.idFuncionario)

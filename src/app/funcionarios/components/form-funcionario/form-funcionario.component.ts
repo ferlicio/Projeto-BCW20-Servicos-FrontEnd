@@ -35,15 +35,15 @@ export class FormFuncionarioComponent implements OnInit {
     private fb: FormBuilder,
     private funcService: FuncionarioService,
     private cargoService: CargosService,
-    private dialogRef: MatDialogRef<FormFuncionarioComponent>, // objeto que permite controlar o dialog aberto
-    private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
+    private dialogRef: MatDialogRef<FormFuncionarioComponent>,
+    private snackbar: MatSnackBar, 
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
 
     this.cargoService.getCargos().subscribe(
-      (cargs) => { // sucesso
+      (cargs) => { 
         this.cargos = cargs
 
       }

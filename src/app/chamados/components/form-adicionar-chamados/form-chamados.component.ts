@@ -72,7 +72,6 @@ export class FormChamadosComponent implements OnInit {
 
     f.funcionario = this.formChamado.value.funcionario
 
-    console.log(f)
     this.chamadosService.postChamado(f, this.formChamado.value.idCliente).subscribe(
       success => {
         this.snackbar.open('Chamado salvo com sucesso', 'Ok', {

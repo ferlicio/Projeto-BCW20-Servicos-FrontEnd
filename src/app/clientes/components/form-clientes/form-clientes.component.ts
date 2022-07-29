@@ -14,9 +14,7 @@ import { ClientesService } from '../../service/clientes.service';
   styleUrls: ['./form-clientes.component.css']
 })
 export class FormClientesComponent implements OnInit {
-  /* 
-    cargos: Cargo[] = []
-    cargoSelect: Cargo = { idCargo: 0, nome: '', descricao: '', salario: 0 } */
+
   salvandoCliente: boolean = false
 
 
@@ -35,8 +33,8 @@ export class FormClientesComponent implements OnInit {
     private fb: FormBuilder,
     private clienteService: ClientesService,
 
-    private dialogRef: MatDialogRef<FormClientesComponent>, // objeto que permite controlar o dialog aberto
-    private snackbar: MatSnackBar, // com esse objeto será criado um snackbar na tela
+    private dialogRef: MatDialogRef<FormClientesComponent>,
+    private snackbar: MatSnackBar,
     private dialog: MatDialog
 
 
@@ -61,8 +59,7 @@ export class FormClientesComponent implements OnInit {
     this.salvandoCliente = true
     const f: Clientes = this.formCliente.value
     const endereco: EnderecoCliente = this.formCliente.value
-    console.log(endereco)
-    console.log(f)
+
     this.clienteService.postCliente(f, endereco).subscribe(
       success => {
         this.snackbar.open('Cliente salvo com sucesso', 'Ok', {
