@@ -2,7 +2,7 @@
   <mat-toolbar-row>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Botão menu" matTooltip="Abrir menu">
-      <mat-icon>menu</mat-icon>
+      <mat-icon id="menu">menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/chamados">
@@ -27,8 +27,9 @@
       </button>
     </mat-menu>
 
-    <h1>Painel de Administrador</h1>
-   
+    <h1>SoulCode Services</h1>
+
+
     <span class="separador"></span>
     <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'd/MM/yy, h:mm'}} </p>
 

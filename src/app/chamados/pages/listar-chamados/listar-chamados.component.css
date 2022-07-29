@@ -31,3 +31,32 @@ table {
   border-radius: 1px;
   margin: 2vh 0;
 }
+
+mat-paginator {
+  width: 100%;
+}
+
+.status {
+  border: 1px solid rgba(0, 0, 0, 0.192);
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.RECEBIDO {
+  background-color: #f5da8b;
+}
+
+.ATRIBUIDO {
+  background-color: #5bc3e0;
+}
+
+.CONCLUIDO {
+  background-color: #adf39f;
+}
+
+.ARQUIVADO {
+  background-color: #b9b9b9;
+}
