@@ -92,7 +92,7 @@ export class CargoComponent implements OnInit {
                   this.snackbar.open('Cargo salvo com sucesso', 'Ok', {
                     duration: 3000
                   })
-
+                  console.log("YOLO")
                   this.recuperarCargo(func.idCargo)
                 }
               )
