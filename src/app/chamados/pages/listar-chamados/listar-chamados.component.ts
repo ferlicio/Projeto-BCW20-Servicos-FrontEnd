@@ -4,10 +4,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChamadosService } from '../../service/chamados.service';
 import { Chamado } from '../../model/chamado';
-import { FormChamadosComponent } from '../../components/form-chamados/form-chamados.component';
+import { FormChamadosComponent } from '../../components/form-adicionar-chamados/form-chamados.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeletarChamadoComponent } from '../../components/deletar-chamado/deletar-chamado.component';
+import { AlterarChamadoComponent } from '../../components/alterar-chamado/alterar-chamado.component';
 
 @Component({
   selector: 'app-listar-chamados',
@@ -110,11 +111,22 @@ export class ListarChamadosComponent implements OnInit {
     }
   }
 
-  abrirFormChamado(): void {
+  abrirFormCadastroChamado(): void {
     const formDialog = this.dialogChamado.open(FormChamadosComponent)
     formDialog.afterClosed().subscribe(
       () => {
-        this.recuperarChamados
+        this.recuperarChamados()
+      }
+    )
+  }
+
+  abrirFormAlterarChamado(chamado: Chamado) {
+    const formDialog = this.dialogChamado.open(AlterarChamadoComponent, {
+      data: chamado
+    })
+    formDialog.afterClosed().subscribe(
+      () => {
+        this.recuperarChamados()
       }
     )
   }

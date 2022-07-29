@@ -1,8 +1,8 @@
 <app-navbar> </app-navbar>
 <div class="container">
-    <mat-form-field appearance="standard">
+    <mat-form-field appearance="standard" class="barra-pesquisa">
         <mat-label>Barra de pesquisa</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Atribuido" #input>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Letras minusculas" #input class="pesquisa">
     </mat-form-field>
 
     <div class="mat-elevation-z8 teste">
@@ -15,12 +15,12 @@
 
             <ng-container matColumnDef="titulo">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
-                <td mat-cell *matCellDef="let chamado"> {{chamado.titulo}} </td>
+                <td mat-cell *matCellDef="let chamado"> {{chamado.titulo | uppercase}} </td>
             </ng-container>
 
             <ng-container matColumnDef="descricao">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Descricao </th>
-                <td mat-cell *matCellDef="let chamado"> {{chamado.descricao}} </td>
+                <td mat-cell *matCellDef="let chamado"> {{chamado.descricao | uppercase}} </td>
             </ng-container>
 
             <ng-container matColumnDef="dataEntrada">
@@ -30,34 +30,35 @@
 
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell *matCellDef="let chamado"> {{chamado.status}} </td>
+                <td mat-cell *matCellDef="let chamado"> {{chamado.status | uppercase}} </td>
             </ng-container>
 
             <ng-container matColumnDef="funcionario.nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Funcionario </th>
                 <td mat-cell *matCellDef="let chamado">
                     <div *ngIf="chamado.funcionario == null; else teste">Não Atribuído</div>
-                    <ng-template #teste> {{ chamado.funcionario.nome }}</ng-template>
+                    <ng-template #teste> {{ chamado.funcionario.nome | uppercase }}</ng-template>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="cliente.nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
-                <td mat-cell *matCellDef="let chamado"> {{chamado.cliente.nome }} </td>
+                <td mat-cell *matCellDef="let chamado"> {{chamado.cliente.nome | uppercase }} </td>
             </ng-container>
 
             <ng-container matColumnDef="pagamento.status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pagamento </th>
                 <td mat-cell *matCellDef="let chamado">
                     <div *ngIf="chamado.pagamento == null; else teste">Não Atribuído</div>
-                    <ng-template #teste> {{ chamado.pagamento.statusPagamento }}</ng-template>
+                    <ng-template #teste> {{ chamado.pagamento.statusPagamento | uppercase }}</ng-template>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
                 <td mat-cell *matCellDef="let chamado">
-                    <button mat-icon-button color="primary" matTooltip="Editar chamado">
+                    <button mat-icon-button color="primary" matTooltip="Editar chamado"
+                        (click)="abrirFormAlterarChamado(chamado)">
                         <mat-icon>edit</mat-icon>
                     </button>
                     <button mat-icon-button color="warn" matTooltip="Excluir chamado" (click)="excluirChamado(chamado)">
@@ -78,7 +79,7 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selecione os chamados por páginas">
         </mat-paginator>
     </div>
-    <button mat-mini-fab color="accent" id="add" matTooltip="Adicionar chamado" (click)="abrirFormChamado()">
+    <button mat-mini-fab color="accent" id="add" matTooltip="Adicionar chamado" (click)="abrirFormCadastroChamado()">
         <mat-icon>add</mat-icon>
     </button>
 

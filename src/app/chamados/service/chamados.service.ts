@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cargo } from 'src/app/cargos/models/cargo';
 import { Chamado } from '../model/chamado';
-import { Clientes } from 'src/app/clientes/models/clientes';
+import { FuncionarioService } from '../../funcionarios/services/funcionario.service';
+import { mergeMap, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ChamadosService {
 
   private readonly baseUrl: string = 'http://localhost:8080/servicos/chamados';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private funcionarioService: FuncionarioService) { }
 
 
   getChamados() {
@@ -26,8 +26,21 @@ export class ChamadosService {
     return this.http.delete(`${this.baseUrl}/${id}`)
   }
 
-  putCargo(chamado: Partial<Chamado>) {
-    return this.http.put<Chamado>(`${this.baseUrl}/${chamado.idChamado}`, chamado)
+  putChamado(chamado: Chamado, idChamado: number, idFuncionario?: number) {
+
+    if (idFuncionario) {
+
+      return this.funcionarioService.getFuncionarioById(idFuncionario).pipe(
+        mergeMap(func => {
+
+          chamado.funcionario = func;
+          console.log(chamado.funcionario);
+
+          return this.http.put<Chamado>(`${this.baseUrl}/${idChamado}`, chamado)
+        })
+      )
+    }
+    return this.http.put<Chamado>(`${this.baseUrl}/${idChamado}`, chamado)
   }
 
   postChamado(chamado: Chamado, idCliente: number) {
