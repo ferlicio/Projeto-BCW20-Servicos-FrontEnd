@@ -28,11 +28,11 @@
     </mat-menu>
 
     <h1>Painel de Administrador</h1>
-
+   
     <span class="separador"></span>
     <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'd/MM/yy, h:mm'}} </p>
 
-    <button mat-icon-button (click)="authService.signOut()" matTooltip="Deslogar">
+    <button class="logout-button" mat-icon-button (click)="authService.signOut()" matTooltip="Deslogar">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar-row>
