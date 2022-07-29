@@ -1,6 +1,5 @@
 mat-card {
   display: flex;
-
   flex-direction: column;
   width: 300px;
 }
@@ -19,4 +18,13 @@ mat-form-field {
 button {
   width: 300px;
   margin-bottom: 15px;
+}
+
+
+@media (max-width: 1700px) {
+ 
+ mat-card {
+    margin: auto;
+  }
+  
 }

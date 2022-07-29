@@ -1,6 +1,10 @@
+
+
 mat-toolbar-row {
   display: flex;
   align-items: center;
+  
+  
 }
 
 .separador {
@@ -14,4 +18,31 @@ p {
 
 h1 {
   padding-left: 4vh;
+}
+
+.logout-button{
+  align-items: flex-end;
+}
+
+
+
+
+@media (max-width: 900px) {
+ 
+  p{
+    display: none;
+  }
+ 
+}
+
+
+@media (max-width: 600px) {
+ 
+  mat-toolbar {
+   min-width: 600px;
+   
+  }
+
+  
+  
 }
