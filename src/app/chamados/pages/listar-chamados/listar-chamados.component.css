@@ -1,20 +1,18 @@
-.teste {
-  height: fit-content;
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 table {
   width: 100%;
+  
+}
+
+.tabela{
+  width: 80%;
 }
 
 #add {
@@ -34,7 +32,9 @@ table {
 
 mat-paginator {
   width: 100%;
+ 
 }
+
 
 .status {
   border: 1px solid rgba(0, 0, 0, 0.192);
@@ -43,20 +43,21 @@ mat-paginator {
   justify-content: center;
   border-radius: 2px;
   font-weight: 500;
+  color: #ffff;
 }
 
 .RECEBIDO {
-  background-color: #f5da8b;
+  background-color: #ffbf00;
 }
 
 .ATRIBUIDO {
-  background-color: #5bc3e0;
+  background-color: #056984;
 }
 
 .CONCLUIDO {
-  background-color: #adf39f;
+  background-color: #28c009;
 }
 
 .ARQUIVADO {
-  background-color: #b9b9b9;
+  background-color: #060000;
 }

@@ -5,7 +5,7 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Letras minusculas" #input class="pesquisa">
     </mat-form-field>
 
-    <div class="mat-elevation-z8 teste">
+    <div class="mat-elevation-z8 tabela">
         <table mat-table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="idChamado">
@@ -64,7 +64,7 @@
                         (click)="abrirFormAlterarChamado(chamado)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" matTooltip="Excluir chamado" (click)="excluirChamado(chamado)">
+                   <button mat-icon-button color="warn" matTooltip="Excluir chamado" (click)="excluirChamado(chamado)">
                         <mat-icon>delete</mat-icon>
                     </button>
 

@@ -3,6 +3,7 @@ mat-card {
 
   flex-direction: column;
   width: 300px;
+  margin:auto;
 }
 
 form {
@@ -27,3 +28,6 @@ button {
    }
    
  }
+
+
+

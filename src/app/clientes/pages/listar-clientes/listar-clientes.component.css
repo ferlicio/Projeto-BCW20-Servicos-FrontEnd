@@ -10,16 +10,18 @@ main {
   
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 25% 1fr;
   padding: 16px;
   gap: 16px;
   box-sizing: border-box; 
+  
 }
 
 table {
   height: fit-content;
   width: 98%;
-  min-width: 530px;
+  min-width: 580px;
+  
   
   
 }
@@ -40,7 +42,7 @@ a {
 
 
 
-@media screen and (max-width: 1700px) {
+@media screen and (max-width: 1535px) {
  
   main {
     display:flex;
@@ -49,7 +51,43 @@ a {
     padding: 16px;
     gap: 16px;
     box-sizing: border-box;
+    justify-content: center;
+    
+    
+  }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    
+   
   }
   
 }
+
+ @media screen and (max-width: 600px) {
+ 
+  main {
+    display:flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: auto;
+    
+    
+  }  
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    
+   
+  }
+  
+}
+
+
 
