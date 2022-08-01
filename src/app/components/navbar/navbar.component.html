@@ -31,7 +31,7 @@
 
 
     <span class="separador"></span>
-    <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'd/MM/yy, h:mm'}} </p>
+    <p> Seja bem vindo {{emailToken}}, seu token irá expirar {{dataToken | date: 'dd/MM/yy, h:mm'}} </p>
 
     <button class="logout-button" mat-icon-button (click)="authService.signOut()" matTooltip="Deslogar">
       <mat-icon>logout</mat-icon>
