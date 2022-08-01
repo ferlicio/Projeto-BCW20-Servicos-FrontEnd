@@ -25,16 +25,16 @@ table {
   color: red;
 }
 
-#add {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-}
 
 a {
   text-decoration: none;
 }
 
+#add {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
 
 .status {
   border: 1px solid rgba(0, 0, 0, 0.192);
