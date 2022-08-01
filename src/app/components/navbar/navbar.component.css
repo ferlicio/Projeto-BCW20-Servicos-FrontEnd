@@ -39,6 +39,6 @@ mat-toolbar {
 
 @media (max-width: 600px) {
   mat-toolbar {
-    min-width: 600px;
+    min-width: 614px;
   }
 }
